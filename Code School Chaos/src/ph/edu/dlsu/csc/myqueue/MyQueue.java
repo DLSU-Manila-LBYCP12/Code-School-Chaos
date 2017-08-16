@@ -1,6 +1,7 @@
 package ph.edu.dlsu.csc.myqueue;
 
-import ph.edu.dlsu.csc.myexception.*;
+import ph.edu.dlsu.csc.myexception.QueueEmptyException;
+import ph.edu.dlsu.csc.myexception.QueueFullException;
 
 /**
  *
