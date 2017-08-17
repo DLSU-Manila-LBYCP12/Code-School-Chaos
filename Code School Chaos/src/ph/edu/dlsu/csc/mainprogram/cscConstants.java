@@ -10,7 +10,7 @@ import java.awt.Font;
 
 /**
  *
- * @author ChristophJohnEric
+ * @author Christoph Kitane
  */
 public interface cscConstants {
     /* Application width and height of the Game. */
