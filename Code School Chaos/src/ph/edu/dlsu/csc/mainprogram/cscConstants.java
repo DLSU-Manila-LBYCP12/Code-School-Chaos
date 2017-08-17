@@ -28,4 +28,6 @@ public interface cscConstants {
     public static final Color BCLICKED = Color.DARK_GRAY;
     
     public static final Color BDEF_COLOR = new Color(186, 206, 235);
+    
+    public static final Color BHOVERING = Color.WHITE;
 }
