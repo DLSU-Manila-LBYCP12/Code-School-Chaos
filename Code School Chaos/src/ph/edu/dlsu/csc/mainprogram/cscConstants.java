@@ -19,9 +19,9 @@ public interface cscConstants {
     public static final int APPLICATION_HEIGHT = 700;
     
     /* Sizes of the Buttons */
-    public static final int BUTTON_WIDTH = 50;
+    public static final int BUTTON_WIDTH = 175;
     
-    public static final int BUTTON_HEIGHT = 150;
+    public static final int BUTTON_HEIGHT = 50;
     
     public static final Font BFONT = new Font("Courier",0,24);
     
