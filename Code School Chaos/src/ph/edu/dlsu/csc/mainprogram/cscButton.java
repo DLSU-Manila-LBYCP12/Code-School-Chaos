@@ -49,7 +49,7 @@ public class cscButton extends GCompound implements cscConstants, MouseListener 
     }
 
     public void mouseEntered(MouseEvent me) {
-        this.button.setFillColor(Color.white);
+        this.button.setFillColor(cscConstants.BHOVERING);
     }
 
     public void mouseExited(MouseEvent me) {
