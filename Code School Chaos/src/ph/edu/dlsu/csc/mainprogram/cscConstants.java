@@ -23,7 +23,7 @@ public interface cscConstants {
     
     public static final int BUTTON_HEIGHT = 50;
     
-    public static final Font BFONT = new Font("Courier",0,24);
+    public static final Font BFONT = new Font("MONTSERRAT",0,18);
     
     public static final Color BCLICKED = Color.DARK_GRAY;
     

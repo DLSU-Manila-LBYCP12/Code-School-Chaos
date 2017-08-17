@@ -12,10 +12,10 @@ import java.awt.event.MouseEvent;
 
 public class CodeSchoolChaos extends GraphicsProgram {
 
-    private final GRoundRect playButton;
-    private final GRoundRect upgradeButton;
-    private final GRoundRect highScoresButton;
-    private final GRoundRect tutorialButton;
+    private final cscButton playButton;
+    private final cscButton upgradeButton;
+    private final cscButton highScoresButton;
+    private final cscButton tutorialButton;
     private GRoundRect exitButton;
     private GImage background;
     private final GLabel code;
@@ -28,9 +28,9 @@ public class CodeSchoolChaos extends GraphicsProgram {
     private final GLabel highScores;
     private final GLabel nameDisplay;
     private final GLabel tutorial;
-
+    
     private String playerName;
-    private Color color = new Color(186, 206, 235);
+    
     private final int APPLICATION_WIDTH = 500;
     private final int APPLICATION_HEIGHT = 700;
 
@@ -38,18 +38,10 @@ public class CodeSchoolChaos extends GraphicsProgram {
     private final int BUTTON_HEIGHT = 50;
 
     public CodeSchoolChaos() {
-        playButton = new GRoundRect(BUTTON_LENGTH, BUTTON_HEIGHT);
-        playButton.setFilled(true);
-        playButton.setFillColor(color);
-        upgradeButton = new GRoundRect(BUTTON_LENGTH, BUTTON_HEIGHT);
-        upgradeButton.setFilled(true);
-        upgradeButton.setFillColor(color);
-        highScoresButton = new GRoundRect(BUTTON_LENGTH, BUTTON_HEIGHT);
-        highScoresButton.setFilled(true);
-        highScoresButton.setFillColor(color);
-        tutorialButton = new GRoundRect(BUTTON_LENGTH, BUTTON_HEIGHT);
-        tutorialButton.setFilled(true);
-        tutorialButton.setFillColor(color);
+        playButton = new cscButton("Story Mode");
+        upgradeButton = new cscButton("Upgrade Weapons");
+        highScoresButton = new cscButton("High Scores");
+        tutorialButton = new cscButton("Tutorials");
         background = new GImage("CSCBackground.png");
         teamBam = new GLabel("Team BAM Productions");
         teamBam.setFont("MONTSERRAT-20");
@@ -149,75 +141,8 @@ public class CodeSchoolChaos extends GraphicsProgram {
                 - nameDisplay.getWidth() / 2, APPLICATION_HEIGHT - 75);
         nameDisplay.setLabel("Welcome, " + playerName);
         addMouseListeners();
-    }
-
-    private boolean isClickedOnPlay(double x, double y) {
-        return (x >= playButton.getX() && x <= playButton.getX() + BUTTON_LENGTH
-                && y >= playButton.getY() && y <= playButton.getY() + BUTTON_HEIGHT);
-    }
-
-    private boolean isClickedOnUpgrade(double x, double y) {
-        return (x >= upgradeButton.getX() && x <= upgradeButton.getX() + BUTTON_LENGTH
-                && y >= upgradeButton.getY() && y <= upgradeButton.getY() + BUTTON_HEIGHT);
-    }
-
-    private boolean isClickedOnScores(double x, double y) {
-        return (x >= highScoresButton.getX() && x <= highScoresButton.getX() + BUTTON_LENGTH
-                && y >= highScoresButton.getY() && y <= highScoresButton.getY() + BUTTON_HEIGHT);
-    }
-
-    private boolean isClickedOnTutorials(double x, double y) {
-        return (x >= tutorialButton.getX() && x <= tutorialButton.getX() + BUTTON_LENGTH
-                && y >= tutorialButton.getY() && y <= tutorialButton.getY() + BUTTON_HEIGHT);
-    }
-
-    public void mouseMoved(MouseEvent me) {
-        if (isClickedOnPlay(me.getX(), me.getY())) {
-            playButton.setFillColor(Color.white);
-        } else if (!isClickedOnPlay(me.getX(), me.getY())) {
-            playButton.setFillColor(color);
-        }
-        if (isClickedOnScores(me.getX(), me.getY())) {
-            highScoresButton.setFillColor(Color.white);
-        } else if (!isClickedOnScores(me.getX(), me.getY())) {
-            highScoresButton.setFillColor(color);
-        }
-        if (isClickedOnUpgrade(me.getX(), me.getY())) {
-            upgradeButton.setFillColor(Color.white);
-        } else if (!isClickedOnUpgrade(me.getX(), me.getY())) {
-            upgradeButton.setFillColor(color);
-        }
-        if(isClickedOnTutorials(me.getX(),me.getY())){
-            tutorialButton.setFillColor(Color.white);
-        } else if(!isClickedOnTutorials(me.getX(), me.getY())){
-            tutorialButton.setFillColor(color);
-        }
-    }
-
-    public void mousePressed(MouseEvent me) {
-        if (isClickedOnPlay(me.getX(), me.getY())) {
-            playButton.setFillColor(Color.yellow);
-        } else if (isClickedOnUpgrade(me.getX(), me.getY())) {
-            upgradeButton.setFillColor(Color.yellow);
-        } else if (isClickedOnScores(me.getX(), me.getY())) {
-            highScoresButton.setFillColor(Color.yellow);
-        } else if (isClickedOnTutorials(me.getX(),me.getY())){
-            tutorialButton.setFillColor(Color.yellow);
-        }
-    }
-
-    public void mouseReleased(MouseEvent me) {
-        if (isClickedOnPlay(me.getX(), me.getY())) {
-            playButton.setFillColor(color);
-        } else if (isClickedOnUpgrade(me.getX(), me.getY())) {
-            upgradeButton.setFillColor(color);
-        } else if (isClickedOnScores(me.getX(), me.getY())) {
-            highScoresButton.setFillColor(color);
-        } else if(!isClickedOnTutorials(me.getX(), me.getY())){
-            tutorialButton.setFillColor(color);
-        }
-    }
-
+    }   
+    
     public static void main(String[] args) {
         new CodeSchoolChaos().start(args);
     }
