@@ -23,6 +23,10 @@ public class CodeSchoolChaos extends GraphicsProgram {
     private final GLabel chaos;
     private final GLabel teamBam;
     private final GLabel project;
+    private final GLabel storyMode;
+    private final GLabel upgradeWeapons;
+    private final GLabel highScores;
+
     private String playerName;
 
     private final int APPLICATION_WIDTH = 500;
@@ -46,7 +50,7 @@ public class CodeSchoolChaos extends GraphicsProgram {
         teamBam = new GLabel("Team BAM Productions");
         teamBam.setFont("MONTSERRAT-20");
         teamBam.setColor(Color.white);
-        project = new GLabel("A project for LBYCP12");
+        project = new GLabel("A Project for LBYCP12");
         project.setFont("MONTSERRAT-20");
         project.setColor(Color.white);
         code = new GLabel("CODE");
@@ -58,6 +62,12 @@ public class CodeSchoolChaos extends GraphicsProgram {
         chaos = new GLabel("CHAOS");
         chaos.setFont("SCORCHED EARTH-45");
         chaos.setColor(Color.white);
+        storyMode = new GLabel("Story Mode");
+        storyMode.setFont("MONTSERRAT-18");
+        upgradeWeapons = new GLabel("Upgrade Weapons");
+        upgradeWeapons.setFont("MONTSERRAT-18");
+        highScores = new GLabel("High Scores");
+        highScores.setFont("MONTSERRAT-18");
     }
 
     private void setupPlayerName() {
@@ -76,19 +86,24 @@ public class CodeSchoolChaos extends GraphicsProgram {
         this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.setBackground(Color.black);
         pause(2000);
-        add(teamBam, APPLICATION_WIDTH / 2 - teamBam.getWidth() / 2, APPLICATION_HEIGHT / 2 - teamBam.getHeight() / 2);
+        add(teamBam, APPLICATION_WIDTH / 2 - teamBam.getWidth() / 2,
+                APPLICATION_HEIGHT / 2 - teamBam.getHeight() / 2);
         pause(2000);
         remove(teamBam);
-        add(project, APPLICATION_WIDTH / 2 - project.getWidth() / 2, APPLICATION_HEIGHT / 2 - project.getHeight() / 2);
+        add(project, APPLICATION_WIDTH / 2 - project.getWidth() / 2,
+                APPLICATION_HEIGHT / 2 - project.getHeight() / 2);
         pause(2000);
         remove(project);
-        add(code, APPLICATION_WIDTH / 2 - code.getWidth() / 2, APPLICATION_HEIGHT / 2 - code.getHeight() / 2);
+        add(code, APPLICATION_WIDTH / 2 - code.getWidth() / 2,
+                APPLICATION_HEIGHT / 2 - code.getHeight() / 2);
         pause(500);
         remove(code);
-        add(school, APPLICATION_WIDTH / 2 - school.getWidth() / 2, APPLICATION_HEIGHT / 2 - school.getHeight() / 2);
+        add(school, APPLICATION_WIDTH / 2 - school.getWidth() / 2,
+                APPLICATION_HEIGHT / 2 - school.getHeight() / 2);
         pause(500);
         remove(school);
-        add(chaos, APPLICATION_WIDTH / 2 - chaos.getWidth() / 2, APPLICATION_HEIGHT / 2 - chaos.getHeight() / 2);
+        add(chaos, APPLICATION_WIDTH / 2 - chaos.getWidth() / 2,
+                APPLICATION_HEIGHT / 2 - chaos.getHeight() / 2);
         pause(500);
         this.setBackground(Color.white);
         add(background);
@@ -101,8 +116,14 @@ public class CodeSchoolChaos extends GraphicsProgram {
         add(chaos, 225, 250);
         pause(200);
         add(playButton, 275, 200);
+        add(storyMode, playButton.getX() + playButton.getWidth() / 2 - storyMode.getWidth() / 2,
+                playButton.getY() + playButton.getHeight() / 2 + storyMode.getHeight() / 2);
         add(upgradeButton, 275, 310);
+        add(upgradeWeapons, upgradeButton.getX() + upgradeButton.getWidth() / 2 - upgradeWeapons.getWidth() / 2,
+                upgradeButton.getY() + upgradeButton.getHeight() / 2 + upgradeWeapons.getHeight() / 2);
         add(highScoresButton, 275, 420);
+        add(highScores, highScoresButton.getX() + highScoresButton.getWidth() / 2 - highScores.getWidth() / 2,
+                highScoresButton.getY() + highScoresButton.getHeight() / 2 + highScores.getHeight() / 2);
         add(code, 225, 50);
         add(school, 225, 100);
         add(chaos, 225, 150);
@@ -124,16 +145,14 @@ public class CodeSchoolChaos extends GraphicsProgram {
         return (x >= highScoresButton.getX() && x <= highScoresButton.getX() + BUTTON_LENGTH
                 && y >= highScoresButton.getY() && y <= highScoresButton.getY() + BUTTON_HEIGHT);
     }
-    
-    public void mousePressed(MouseEvent me){
-        if(isClickedOnPlay(me.getX(),me.getY())){
-            
-        }
-        else if(isClickedOnUpgrade(me.getX(),me.getY())){
-            
-        }
-        else if(isClickedOnScores(me.getX(),me.getY())){
-            
+
+    public void mousePressed(MouseEvent me) {
+        if (isClickedOnPlay(me.getX(), me.getY())) {
+
+        } else if (isClickedOnUpgrade(me.getX(), me.getY())) {
+
+        } else if (isClickedOnScores(me.getX(), me.getY())) {
+
         }
     }
 
