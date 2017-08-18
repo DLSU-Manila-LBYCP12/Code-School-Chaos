@@ -96,6 +96,10 @@ public class LevelTrialPMC extends GraphicsProgram implements cscConstants{
                     add(bg1);
                     add(bg2,0,-bg1.getHeight());
                     add(bg3,0,bg2.getY()-bg2.getHeight());
+                    bg1.sendToBack();
+                    bg2.sendToBack();
+                    bg3.sendToBack();
+                    
                     //move
                     while(MoveBG){
                         //replace
@@ -109,6 +113,9 @@ public class LevelTrialPMC extends GraphicsProgram implements cscConstants{
                             add(bg1,0,y2);
                             add(bg2,0,y3);
                             add(bg3,0,y4);
+                            bg1.sendToBack();
+                            bg2.sendToBack();
+                            bg3.sendToBack();
                         }
                         //move
                         bg1.move(0,1);
