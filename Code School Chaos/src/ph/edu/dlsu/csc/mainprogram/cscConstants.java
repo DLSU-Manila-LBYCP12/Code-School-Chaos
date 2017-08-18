@@ -36,7 +36,7 @@ public interface cscConstants {
     
     public static final int INITIAL_LIVES = 3;
     
-    public static final int DAMAGE_INCEMENT = 10;
+    public static final int DAMAGE_INCREMENT = 10;
     
     public static final String UPGRADE1 = "bullet_up1.png";
     
