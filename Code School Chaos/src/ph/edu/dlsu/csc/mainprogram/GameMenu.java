@@ -4,6 +4,7 @@ package ph.edu.dlsu.csc.mainprogram;
  *
  * @author Chan, Kitane, Velasco
  */
+import ph.edu.dlsu.csc.gameObjects.Level1z;
 import acm.graphics.*;
 import acm.io.IODialog;
 import acm.program.*;
@@ -240,6 +241,7 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         story = true;
         add(storyMode, storyModeButton.getX() + storyModeButton.getWidth() / 2 - storyMode.getWidth() / 2 - 2,
                 storyModeButton.getY() + storyModeButton.getHeight() / 2 + storyMode.getAscent() / 2 - 3);
+        //new Level1z().begin();
     }
 
     public void displayMessage(String message) {
