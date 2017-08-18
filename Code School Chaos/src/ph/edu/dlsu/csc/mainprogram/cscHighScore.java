@@ -254,12 +254,12 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
             ;
         }
     }
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         cscHighScore highscore;
         highscore = new cscHighScore();
         highscore.start(args);
         highscore.checkHiScore(100);
         highscore.checkHiScore(150);
         highscore.checkHiScore(200);
-    }
+    }*/
 }
