@@ -13,11 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class LevelTrialPMC extends GraphicsProgram implements cscConstants{
+public class LevelTemp extends GraphicsProgram implements cscConstants{
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Main Classes ~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //main classes only for testing
     public static void main(String[] args) {
-        new LevelTrialPMC().start(args);
+        new LevelTemp().start(args);
     }
     public void init(){//set by app
         setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);

@@ -186,7 +186,7 @@ public class GameMenu extends GraphicsProgram {
     
     private void levelSelection(){
         System.out.println("level select");
-        
+        new Level1z().begin();
     }
     
     

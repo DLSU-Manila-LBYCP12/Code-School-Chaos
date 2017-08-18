@@ -40,7 +40,7 @@ public class cscPauseScreen extends GCanvas implements cscConstants {
     private final static int CLICK12_OFFSET = 5;
     private boolean isPaused = false;
     public boolean isMouseInScreen=true;
-    AudioClip bgm = MediaTools.loadAudioClip("bgm.au");
+    //AudioClip bgm = MediaTools.loadAudioClip("bgm.au");
 
     public cscPauseScreen(){
         overlay = new GRect(cscConstants.APPLICATION_WIDTH, cscConstants.APPLICATION_HEIGHT);
@@ -52,7 +52,7 @@ public class cscPauseScreen extends GCanvas implements cscConstants {
     }
     private void screenPause() {
         this.add(overlay);
-        bgm.stop();
+        //bgm.stop();
         GLabel click1 = new GLabel("- PAUSED -");
         GLabel click2 = new GLabel("Click Anywhere to Resume");
         click1.setFont(CLICK1_FONT);
@@ -73,7 +73,7 @@ public class cscPauseScreen extends GCanvas implements cscConstants {
         remove(overlay);
         remove(click1);
         remove(click2);
-        bgm.loop();
+        //bgm.loop();
     }
 
     private static boolean isAutoPause = true;
