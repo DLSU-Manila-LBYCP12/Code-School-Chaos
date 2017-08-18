@@ -12,7 +12,7 @@ public class Level1 extends GraphicsProgram implements cscConstants {
     private GImage player;
     private GImage background;
     private GImage background2;
-    private GRect rect = new GRect(50,50);
+    private GRect rect = new GRect(50,50);//unused so far
     
     public Level1(){
         background = new GImage("Classroom.png");
