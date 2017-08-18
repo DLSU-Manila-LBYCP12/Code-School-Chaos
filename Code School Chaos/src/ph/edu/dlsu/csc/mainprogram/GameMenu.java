@@ -17,7 +17,6 @@ public class GameMenu extends GraphicsProgram {
     private final cscButton upgradeButton;
     private final cscButton highScoresButton;
     private final cscButton tutorialButton;
-    private GRoundRect exitButton;
     private GImage background;
     private final GLabel code;
     private final GLabel school;
@@ -39,7 +38,7 @@ public class GameMenu extends GraphicsProgram {
     private final int BUTTON_HEIGHT = 50;
 
     public GameMenu() {
-        playButton = new cscButton("Story Mode");
+        playButton = new cscButton("Endless Mode");
         upgradeButton = new cscButton("Upgrade Weapons");
         highScoresButton = new cscButton("High Scores");
         tutorialButton = new cscButton("Tutorials");
@@ -59,7 +58,7 @@ public class GameMenu extends GraphicsProgram {
         chaos = new GLabel("CHAOS");
         chaos.setFont("SCORCHED EARTH-45");
         chaos.setColor(Color.white);
-        storyMode = new GLabel("Story Mode");
+        storyMode = new GLabel("Endless Mode");
         storyMode.setFont("MONTSERRAT-18");
         upgradeWeapons = new GLabel("Upgrade Weapons");
         upgradeWeapons.setFont("MONTSERRAT-18");
@@ -116,7 +115,7 @@ public class GameMenu extends GraphicsProgram {
     }
     
     public void init() {
-        //intro();
+        intro();
         this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.setBackground(Color.white);
         add(background);
@@ -167,8 +166,18 @@ public class GameMenu extends GraphicsProgram {
     }
     
     private boolean isClickedUpgradeButton(double x, double y){
-        return (x >= playButton.getX() && x <= playButton.getX() + BUTTON_LENGTH &&
-                y >= playButton.getY() && y <= playButton.getY() + BUTTON_HEIGHT);
+        return (x >= upgradeButton.getX() && x <= upgradeButton.getX() + BUTTON_LENGTH &&
+                y >= upgradeButton.getY() && y <= upgradeButton.getY() + BUTTON_HEIGHT);
+    }
+    
+    private boolean isClickedScoreButton(double x, double y){
+        return (x >= highScoresButton.getX() && x <= highScoresButton.getX() + BUTTON_LENGTH &&
+                y >= highScoresButton.getY() && y <= highScoresButton.getY() + BUTTON_HEIGHT);
+    }
+    
+    private boolean isClickedTutorialButton(double x, double y){
+        return (x >= highScoresButton.getX() && x <= highScoresButton.getX() + BUTTON_LENGTH &&
+                y >= highScoresButton.getY() && y <= highScoresButton.getY() + BUTTON_HEIGHT);
     }
     
     
@@ -180,13 +189,24 @@ public class GameMenu extends GraphicsProgram {
             levelSelection();
         }
         else if(isClickedUpgradeButton(me.getX(),me.getY())){
-            
+            //call upgrade window
         }
+        else if(isClickedScoreButton(me.getX(),me.getY())){
+            //call high score window
+        }
+        else if(isClickedTutorialButton(me.getX(),me.getY())){
+            //call tutorial button
+        }
+        
     }
     
     private void levelSelection(){
         System.out.println("level select");
         new Level1z().begin();
+    }
+    
+    public void displayMessage(String message){
+        
     }
     
     
