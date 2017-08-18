@@ -19,14 +19,27 @@ public class LevelTrialPMC extends GraphicsProgram implements cscConstants{
     public static void main(String[] args) {
         new LevelTrialPMC().start(args);
     }
-    public void init(){
+    public void init(){//set by app
         setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
     }
-    public void run(){
+    public void run(){//set by level maker
         MoveBG=true;
         PauseBG=false;
         Thread BGMover=startMoveBGThread();
-        
+        //drawPlayer();
+        add(sprite,(APPLICATION_WIDTH-sprite.getWidth())/2.0D,
+                APPLICATION_HEIGHT*3/4.0D-sprite.getHeight()/2.0D);
+        waitForClick();
+        System.out.println("clicked, now move");
+        addMouseListeners(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                sprite.setLocation(e.getX()-sprite.getWidth()/2.0D,
+                    e.getY()-sprite.getHeight()/2.0D);
+                System.out.println("e.getX() = " + e.getX());
+                System.out.println("e.getY() = " + e.getY());
+            }
+        });
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~ Debugging & Misc ~~~~~~~~~~~~~~~~~~~~~~~~~//
     // <editor-fold defaultstate="collapsed" desc="p(),pl(),pel()">
@@ -57,8 +70,11 @@ public class LevelTrialPMC extends GraphicsProgram implements cscConstants{
     volatile boolean MoveBG=false;
     volatile boolean PauseBG=false;
     
-    
+    //player
+    GImage sprite=new GImage("csc_character.png");
+    //Player pl=new Player(sprite); still idk
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //bg
     /**
      * (don't be intimidated by thread, you can simply 
      *  stop it by setting MoveBG to false)
@@ -111,5 +127,11 @@ public class LevelTrialPMC extends GraphicsProgram implements cscConstants{
         bgMovement.setPriority(Thread.MIN_PRIORITY);
         bgMovement.start();
         return bgMovement;
+    }
+    
+    //player
+    void drawPlayer(){
+        add(sprite,(APPLICATION_WIDTH-sprite.getWidth())/2.0D,
+                APPLICATION_HEIGHT*3/4.0D-sprite.getHeight()/2.0D);
     }
 }

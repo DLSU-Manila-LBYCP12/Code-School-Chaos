@@ -9,8 +9,8 @@ import acm.graphics.GOval;
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
 public class Player{
     
-        
-    public Player(){//constructor
+    //class basicaly manipulates the sprite
+    public Player(GImage charSprite){//constructor
         
     }
     
