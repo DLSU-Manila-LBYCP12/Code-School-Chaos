@@ -43,6 +43,7 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
     private final String CLICK_FONT = "SansSerif-25";
     private final int CLICK_Y_OFFSET = 110;
     private String name = "";
+    private GImage background = new GImage("csc_highscore_scene.png");
 
     private double ctrX(GObject g) {
         return (cscConstants.APPLICATION_WIDTH - g.getWidth()) / 2;
@@ -104,6 +105,8 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
     public void checkHiScore(int score) {
         System.out.println("checkHiScore executed.");
         removeAll();
+        add(background);
+        System.out.print(background);
         int size = scores.size();
         if (size == 0) {
             enterName(1, score);
