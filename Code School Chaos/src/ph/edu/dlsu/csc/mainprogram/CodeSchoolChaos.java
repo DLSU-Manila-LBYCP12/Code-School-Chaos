@@ -107,10 +107,14 @@ public class CodeSchoolChaos extends GraphicsProgram {
         pause(500);
     }
     
-    
+    private void codeSchoolChaos(){
+        add(code, 225, 100);
+        add(school, 225, 175);
+        add(chaos, 225, 250);
+    }
     
     public void init() {
-        intro();
+        //intro();
         this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.setBackground(Color.white);
         add(background);
@@ -118,9 +122,7 @@ public class CodeSchoolChaos extends GraphicsProgram {
         code.setColor(Color.black);
         school.setColor(Color.black);
         chaos.setColor(Color.BLACK);
-        add(code, 225, 100);
-        add(school, 225, 175);
-        add(chaos, 225, 250);
+        codeSchoolChaos();
         pause(200);
         playButton.setCommand("play");
         add(playButton, 275, 200);
@@ -147,7 +149,35 @@ public class CodeSchoolChaos extends GraphicsProgram {
                 - nameDisplay.getWidth() / 2, APPLICATION_HEIGHT - 75);
         nameDisplay.setLabel("Welcome, " + playerName);
         addMouseListeners();
-    }   
+    }
+    
+    private boolean isClickedPlayButton(double x, double y){
+        return (x >= playButton.getX() && x <= playButton.getX() + BUTTON_LENGTH &&
+                y >= playButton.getY() && y <= playButton.getY() + BUTTON_HEIGHT);
+    }
+    
+    private boolean isClickedUpgradeButton(double x, double y){
+        return (x >= playButton.getX() && x <= playButton.getX() + BUTTON_LENGTH &&
+                y >= playButton.getY() && y <= playButton.getY() + BUTTON_HEIGHT);
+    }
+    
+    
+    public void mouseClicked(MouseEvent me) {
+        if( isClickedPlayButton(me.getX(),me.getY())){
+            removeAll();
+            add(background);
+            codeSchoolChaos();
+            levelSelection();
+        }
+        else if(isClickedUpgradeButton(me.getX(),me.getY())){
+            
+        }
+    }
+    
+    private void levelSelection(){
+        
+    }
+    
     
     public static void main(String[] args) {
         new CodeSchoolChaos().start(args);
