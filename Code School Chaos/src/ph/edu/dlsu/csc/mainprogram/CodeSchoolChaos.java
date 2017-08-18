@@ -127,19 +127,19 @@ public class CodeSchoolChaos extends GraphicsProgram {
         playButton.setCommand("play");
         add(playButton, 275, 200);
         add(storyMode, playButton.getX() + playButton.getWidth() / 2 - storyMode.getWidth() / 2,
-                playButton.getY() + playButton.getHeight() / 2 + storyMode.getHeight() / 2);
+                playButton.getY() + playButton.getHeight() / 2 + storyMode.getAscent()/ 2);
         upgradeButton.setCommand("upgrade");
         add(upgradeButton, 275, 260);
         add(upgradeWeapons, upgradeButton.getX() + upgradeButton.getWidth() / 2 - upgradeWeapons.getWidth() / 2,
-                upgradeButton.getY() + upgradeButton.getHeight() / 2 + upgradeWeapons.getHeight() / 2);
+                upgradeButton.getY() + upgradeButton.getHeight() / 2 + upgradeWeapons.getAscent() / 2);
         highScoresButton.setCommand("highscore");
         add(highScoresButton, 275, 320);
         add(highScores, highScoresButton.getX() + highScoresButton.getWidth() / 2 - highScores.getWidth() / 2,
-                highScoresButton.getY() + highScoresButton.getHeight() / 2 + highScores.getHeight() / 2);
+                highScoresButton.getY() + highScoresButton.getHeight() / 2 + highScores.getAscent() / 2);
         tutorialButton.setCommand("tutorial");
         add(tutorialButton, 275, 380);
         add(tutorial, tutorialButton.getX() + tutorialButton.getWidth() / 2 - tutorial.getWidth() / 2,
-                tutorialButton.getY() + tutorialButton.getHeight() / 2 + tutorial.getHeight() / 2);
+                tutorialButton.getY() + tutorialButton.getHeight() / 2 + tutorial.getAscent() / 2);
         add(code, 225, 50);
         add(school, 225, 100);
         add(chaos, 225, 150);

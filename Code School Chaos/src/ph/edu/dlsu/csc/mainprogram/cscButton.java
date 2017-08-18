@@ -28,10 +28,11 @@ public class cscButton extends GCompound implements cscConstants, MouseListener 
         this.button.setFillColor(Color.white);
         this.buttonText = new GLabel("");
         this.buttonText.setFont(BFONT);
+        this.button.setFillColor(cscConstants.BDEF_COLOR);
         this.buttonText.setColor(Color.white);
+        setLabel(text);
         add(this.button);
         add(this.buttonText);
-        setLabel(text);
         addMouseListener(this);
     }
 
