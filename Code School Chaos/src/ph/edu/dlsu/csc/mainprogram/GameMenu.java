@@ -8,9 +8,10 @@ import acm.graphics.*;
 import acm.io.IODialog;
 import acm.program.*;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.event.MouseEvent;
 
-public class CodeSchoolChaos extends GraphicsProgram {
+public class GameMenu extends GraphicsProgram {
 
     private final cscButton playButton;
     private final cscButton upgradeButton;
@@ -37,7 +38,7 @@ public class CodeSchoolChaos extends GraphicsProgram {
     private final int BUTTON_LENGTH = 175;
     private final int BUTTON_HEIGHT = 50;
 
-    public CodeSchoolChaos() {
+    public GameMenu() {
         playButton = new cscButton("Story Mode");
         upgradeButton = new cscButton("Upgrade Weapons");
         highScoresButton = new cscButton("High Scores");
@@ -82,18 +83,19 @@ public class CodeSchoolChaos extends GraphicsProgram {
         }
     }
 
-    private void intro() {
+    private void intro() {//add sound effects for epicness
         this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.setBackground(Color.black);
-        pause(2000);
+        pause(500);
         add(teamBam, APPLICATION_WIDTH / 2 - teamBam.getWidth() / 2,
                 APPLICATION_HEIGHT / 2 - teamBam.getHeight() / 2);
         pause(2000);
         remove(teamBam);
         add(project, APPLICATION_WIDTH / 2 - project.getWidth() / 2,
                 APPLICATION_HEIGHT / 2 - project.getHeight() / 2);
-        pause(2000);
+        pause(1500);
         remove(project);
+        pause(500);
         add(code, APPLICATION_WIDTH / 2 - code.getWidth() / 2,
                 APPLICATION_HEIGHT / 2 - code.getHeight() / 2);
         pause(500);
@@ -151,6 +153,14 @@ public class CodeSchoolChaos extends GraphicsProgram {
         addMouseListeners();
     }
     
+    public void run(){
+        //remove menu bar:
+        Frame[] fs=Frame.getFrames();
+        for(Frame f:fs){
+            f.setMenuBar(null);
+        }
+    }
+    
     private boolean isClickedPlayButton(double x, double y){
         return (x >= playButton.getX() && x <= playButton.getX() + BUTTON_LENGTH &&
                 y >= playButton.getY() && y <= playButton.getY() + BUTTON_HEIGHT);
@@ -175,11 +185,12 @@ public class CodeSchoolChaos extends GraphicsProgram {
     }
     
     private void levelSelection(){
+        System.out.println("level select");
         
     }
     
     
     public static void main(String[] args) {
-        new CodeSchoolChaos().start(args);
+        new GameMenu().start(args);
     }
 }
