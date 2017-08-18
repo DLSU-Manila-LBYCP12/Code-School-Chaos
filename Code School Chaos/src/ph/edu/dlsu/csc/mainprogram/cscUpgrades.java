@@ -30,9 +30,15 @@ import java.awt.*;
  */
 public class cscUpgrades implements cscConstants {
 
-    private int bulletDamage = cscConstants.INITIAL_DAMAGE;
-    private int numLives = cscConstants.INITIAL_LIVES;
-    private GImage bullet = new GImage("bullet.png");
+    private int bulletDamage;
+    private int numLives;
+    private GImage bullet;
+    
+    public cscUpgrades(){
+        bulletDamage = cscConstants.INITIAL_DAMAGE;
+        numLives = cscConstants.INITIAL_LIVES;
+        bullet = new GImage("bullet.png");
+    }
 
     public int damageUpgrade(int upgradeLevel) {
         switch (upgradeLevel) {
