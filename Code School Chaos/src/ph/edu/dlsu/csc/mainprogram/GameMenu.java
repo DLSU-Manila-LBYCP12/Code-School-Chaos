@@ -128,7 +128,7 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
     }
 
     public void init() {
-        //intro();
+        intro();
         this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.setBackground(Color.white);
         add(background);
