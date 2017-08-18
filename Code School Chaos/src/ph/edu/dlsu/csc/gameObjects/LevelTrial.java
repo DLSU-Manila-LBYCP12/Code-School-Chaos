@@ -35,21 +35,17 @@ import javax.swing.*;
 import ph.edu.dlsu.csc.mainprogram.cscConstants;
 import static ph.edu.dlsu.csc.mainprogram.cscConstants.*;
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class LevelTest extends GraphicsProgram implements cscConstants{
+public class LevelTrial extends GraphicsProgram implements cscConstants{
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Main Classes ~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //main classes only for testing
     public static void main(String[] args) {
-        new LevelTest().start(args);
+        new LevelTrial().start(args);
     }
     public void init(){//set by app
         setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
     }
-    public void run(){//set by level maker
-        //
-        MoveBG=true;
-        PauseBG=false;
-        Thread BGMover=startMoveBGThread();
-        
+    public void run(){//set by level maker...?
+        makeLevel();
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~ Debugging & Misc ~~~~~~~~~~~~~~~~~~~~~~~~~//
     // <editor-fold defaultstate="collapsed" desc="p(),pl(),pel()">
@@ -81,8 +77,16 @@ public class LevelTest extends GraphicsProgram implements cscConstants{
     volatile boolean PauseBG=false;
     
     //player
-    GImage sprite=new GImage("csc_character.png");
-    //Player pl=new Player(sprite); still idk
+    Player pl=new Player();
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~ call this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    void makeLevel(){
+        //background
+        MoveBG=true;
+        PauseBG=false;
+        Thread bgThr=startMoveBGThread();
+        //player
+        pl.addToGCanvas(getGCanvas());
+    }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //bg
     /**
@@ -146,9 +150,4 @@ public class LevelTest extends GraphicsProgram implements cscConstants{
         return bgMovement;
     }
     
-    //player
-    void drawPlayer(){
-        add(sprite,(APPLICATION_WIDTH-sprite.getWidth())/2.0D,
-                APPLICATION_HEIGHT*3/4.0D-sprite.getHeight()/2.0D);
-    }
 }
