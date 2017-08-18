@@ -16,13 +16,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import ph.edu.dlsu.csc.myarraylist.MyList;
 
 /**
  *
  * @author ChristophJohnEric
  */
-public class cscHighScore extends GCanvas implements cscConstants {
+public class cscHighScore extends GraphicsProgram implements cscConstants {
 
     private static final int HI_SCORES = 5;
     private MyList<String> names = new MyList<String>();
@@ -47,7 +48,8 @@ public class cscHighScore extends GCanvas implements cscConstants {
         return (cscConstants.APPLICATION_WIDTH - g.getWidth()) / 2;
     }
 
-    public cscHighScore(int score) {
+    public cscHighScore() {
+        setSize(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT);
         names.createList();
         scores.createList();
         String filePath = new File("").getAbsolutePath();
@@ -96,9 +98,12 @@ public class cscHighScore extends GCanvas implements cscConstants {
                 scores.add(i, 0);
             }
         }
+        addKeyListeners();
     }
 
     public void checkHiScore(int score) {
+        System.out.println("checkHiScore executed.");
+        removeAll();
         int size = scores.size();
         if (size == 0) {
             enterName(1, score);
@@ -130,7 +135,8 @@ public class cscHighScore extends GCanvas implements cscConstants {
         }
     }
 
-    public void enterName(int index, int score) {//index is where to insert entry
+    private void enterName(int index, int score) {//index is where to insert entry
+        System.out.println("enterName executed.");
         yay.setVisible(false);
         yay.setFont(YAY_FONT);
         yay.setColor(new Color(0, 237, 0));
@@ -245,5 +251,12 @@ public class cscHighScore extends GCanvas implements cscConstants {
             ;
         }
     }
-
+    public static void main(String[] args){
+        cscHighScore highscore;
+        highscore = new cscHighScore();
+        highscore.start(args);
+        highscore.checkHiScore(100);
+        highscore.checkHiScore(150);
+        highscore.checkHiScore(200);
+    }
 }
