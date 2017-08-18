@@ -98,7 +98,7 @@ public class cscHighScore extends GCanvas implements cscConstants {
         }
     }
 
-    private void checkHiScore(int score) {
+    public void checkHiScore(int score) {
         int size = scores.size();
         if (size == 0) {
             enterName(1, score);
@@ -130,7 +130,7 @@ public class cscHighScore extends GCanvas implements cscConstants {
         }
     }
 
-    private void enterName(int index, int score) {//index is where to insert entry
+    public void enterName(int index, int score) {//index is where to insert entry
         yay.setVisible(false);
         yay.setFont(YAY_FONT);
         yay.setColor(new Color(0, 237, 0));
