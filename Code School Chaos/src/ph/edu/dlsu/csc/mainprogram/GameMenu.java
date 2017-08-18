@@ -4,6 +4,7 @@ package ph.edu.dlsu.csc.mainprogram;
  *
  * @author Chan, Kitane, Velasco
  */
+import ph.edu.dlsu.csc.gameObjects.Level1z;
 import acm.graphics.*;
 import acm.io.IODialog;
 import acm.program.*;
@@ -202,7 +203,7 @@ public class GameMenu extends GraphicsProgram {
     
     private void levelSelection(){
         System.out.println("level select");
-        new Level1z().begin();
+        //new Level1z().begin();
     }
     
     public void displayMessage(String message){

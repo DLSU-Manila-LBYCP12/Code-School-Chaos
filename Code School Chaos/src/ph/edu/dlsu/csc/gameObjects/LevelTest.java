@@ -1,5 +1,25 @@
-/* © 2017 by Patrick Matthew Chan */
-package ph.edu.dlsu.csc.mainprogram;
+/*
+ * Copyright © Patrick Chan, Christoph Kitane, Neil Velasco.
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package ph.edu.dlsu.csc.gameObjects;
 import acm.graphics.*;
 import acm.io.*;
 import acm.program.*;
@@ -12,34 +32,24 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import ph.edu.dlsu.csc.mainprogram.cscConstants;
+import static ph.edu.dlsu.csc.mainprogram.cscConstants.*;
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class LevelTemp extends GraphicsProgram implements cscConstants{
+public class LevelTest extends GraphicsProgram implements cscConstants{
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Main Classes ~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //main classes only for testing
     public static void main(String[] args) {
-        new LevelTemp().start(args);
+        new LevelTest().start(args);
     }
     public void init(){//set by app
         setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
     }
     public void run(){//set by level maker
+        //
         MoveBG=true;
         PauseBG=false;
         Thread BGMover=startMoveBGThread();
-        //drawPlayer();
-        add(sprite,(APPLICATION_WIDTH-sprite.getWidth())/2.0D,
-                APPLICATION_HEIGHT*3/4.0D-sprite.getHeight()/2.0D);
-        waitForClick();
-        System.out.println("clicked, now move");
-        addMouseListeners(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                sprite.setLocation(e.getX()-sprite.getWidth()/2.0D,
-                    e.getY()-sprite.getHeight()/2.0D);
-                System.out.println("e.getX() = " + e.getX());
-                System.out.println("e.getY() = " + e.getY());
-            }
-        });
+        
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~ Debugging & Misc ~~~~~~~~~~~~~~~~~~~~~~~~~//
     // <editor-fold defaultstate="collapsed" desc="p(),pl(),pel()">

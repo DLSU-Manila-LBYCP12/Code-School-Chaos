@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.mainprogram;
+package ph.edu.dlsu.csc.gameObjects;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
 public class Level1z extends LevelTemp{

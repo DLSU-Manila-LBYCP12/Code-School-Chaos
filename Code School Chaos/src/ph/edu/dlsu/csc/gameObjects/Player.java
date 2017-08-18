@@ -1,5 +1,5 @@
 /* © 2017 by Patrick Matthew Chan */
-package ph.edu.dlsu.csc.mainprogram;
+package ph.edu.dlsu.csc.gameObjects;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
 import acm.graphics.GCompound;
