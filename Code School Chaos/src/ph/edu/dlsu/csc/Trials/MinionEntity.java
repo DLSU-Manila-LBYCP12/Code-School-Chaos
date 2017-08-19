@@ -29,14 +29,25 @@ import acm.graphics.GImage;
 public class MinionEntity {
     GCanvas gc;
     GImage sprite;//the GImg it manipulates
-    double health=20;
+    public double health=20;
         
-    public MinionEntity(){//constructor
-        ;
+    public MinionEntity(GCanvas gc, GImage gcSprite){//constructor
+        this.gc=gc;
+        sprite=gcSprite;
     }
     
     //other methods
-    //hit
+    
+    public void hit(int decrement){
+        health-=decrement;
+    }
+    public boolean isDead(){
+        return health<=0;
+    }
+    //assumes already in canvas
+    public void move(double dx,double dy){
+        sprite.move(dx, dy);
+    }
     
     
     

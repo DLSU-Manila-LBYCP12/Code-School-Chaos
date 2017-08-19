@@ -130,7 +130,7 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
     }
 
     public void init() {
-        intro();
+        //intro();
         this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.setBackground(Color.white);
         add(background);
@@ -220,10 +220,14 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         } else if (isClickedStoryButton(me.getX(), me.getY()) && story) {
             System.out.println("clickedSto");
             displayMessage("Coming soon");
+            removeAll();
+            LevelTrial lvT=new LevelTrial();
+            lvT.makeLevel(getGCanvas());
         } else if (isClickedEndlessButton(me.getX(), me.getY()) && endlessMode) {
             System.out.println("clickedEnd");
             removeAll();
-            new LevelTrial().makeLevel(getGCanvas());
+            LevelTrial lvT=new LevelTrial();
+            lvT.makeLevel(getGCanvas());
         }
     }
 
