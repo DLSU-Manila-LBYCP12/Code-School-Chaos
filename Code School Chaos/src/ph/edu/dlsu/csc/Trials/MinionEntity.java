@@ -48,6 +48,7 @@ public class MinionEntity {
     public void move(double dx,double dy){
         sprite.move(dx, dy);
     }
+    //shoot
     
     
     

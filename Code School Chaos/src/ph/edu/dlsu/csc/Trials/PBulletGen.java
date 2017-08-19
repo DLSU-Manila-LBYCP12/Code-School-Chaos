@@ -87,6 +87,7 @@ public class PBulletGen implements cscConstants {
                     now.tick();
                     i++;
                 } else {
+                    gc.remove(bulletList.get(i).gcBullet);
                     bulletList.remove(i);
                 }
             }

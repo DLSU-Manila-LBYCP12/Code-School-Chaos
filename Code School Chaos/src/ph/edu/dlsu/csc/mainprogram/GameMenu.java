@@ -130,7 +130,7 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
     }
 
     public void init() {
-        intro();
+        //intro();
         this.setBackground(Color.white);
         add(background);
         pause(250);

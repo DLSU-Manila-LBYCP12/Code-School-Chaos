@@ -65,15 +65,37 @@ public class Player implements cscConstants{
         gc.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                charSprite.setLocation(e.getX()-charSprite.getWidth()/2.0D,
-                e.getY()-charSprite.getHeight()/2.0D);
+                double newX=e.getX()-charSprite.getWidth()/2.0D;
+                double newY=e.getY()-charSprite.getHeight()/2.0D;
+                if(newX<-10){
+                    newX=-10;
+                } else if (newX+charSprite.getWidth()>APPLICATION_WIDTH+10){
+                    newX=APPLICATION_WIDTH-charSprite.getWidth()+10;
+                }
+                if(newY<-10){
+                    newY=-10;
+                } else if(newY+charSprite.getHeight()>gc.getHeight()+10){
+                    newY=gc.getHeight()-charSprite.getHeight()+10;
+                }
+                charSprite.setLocation(newX,newY);
                 isMousePressed=true;
             }
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                charSprite.setLocation(e.getX()-charSprite.getWidth()/2.0D,
-                e.getY()-charSprite.getHeight()/2.0D);
+                double newX=e.getX()-charSprite.getWidth()/2.0D;
+                double newY=e.getY()-charSprite.getHeight()/2.0D;
+                if(newX<-10){
+                    newX=-10;
+                } else if (newX+charSprite.getWidth()>APPLICATION_WIDTH+10){
+                    newX=APPLICATION_WIDTH-charSprite.getWidth()+10;
+                }
+                if(newY<-10){
+                    newY=-10;
+                } else if(newY+charSprite.getHeight()>gc.getHeight()+10){
+                    newY=gc.getHeight()-charSprite.getHeight()+10;
+                }
+                charSprite.setLocation(newX,newY);
                 isMousePressed=false;
                 //System.out.println("e.getX() = " + e.getX());
                 //System.out.println("e.getY() = " + e.getY());
