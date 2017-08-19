@@ -35,14 +35,30 @@ import javax.swing.*;
 import ph.edu.dlsu.csc.mainprogram.cscConstants;
 import static ph.edu.dlsu.csc.mainprogram.cscConstants.*;
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class LevelTrial extends GraphicsProgram implements cscConstants{
+public class LevelTrial extends GraphicsProgram implements cscConstants, Runnable{
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Main Classes ~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //main classes only for testing
     public static void main(String[] args) {
-        new LevelTrial().start(args);
+        //new LevelTrial().start(args);
+        LevelTrial trial = new LevelTrial();
+        
+        trial.setPreferredSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        trial.setMaximumSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        trial.setMinimumSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        
+        JFrame frame = new JFrame("Code School Chaos.exe");
+        frame.add(trial);
+        frame.pack();
+        frame.setSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
+        trial.start();
     }
     public void init(){//set by app
-        setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        controller = new cscController();
     }
     public void run(){//set by level maker...?
         makeLevel();
@@ -75,6 +91,7 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
     volatile boolean isMovingBG=false;
     volatile boolean MoveBG=false;
     volatile boolean PauseBG=false;
+    private cscController controller;
     
     //player
     Player pl=new Player();
@@ -143,11 +160,16 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
                     }
                     isMovingBG=false;
                 }
+                //controller.draw(g);
             }
         });
         bgMovement.setPriority(Thread.MIN_PRIORITY);
         bgMovement.start();
         return bgMovement;
+    }
+    
+    private void tick(){
+        controller.tick();
     }
     
 }

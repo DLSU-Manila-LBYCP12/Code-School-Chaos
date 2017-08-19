@@ -21,12 +21,37 @@
  */
 package ph.edu.dlsu.csc.gameObjects;
 //import java.lang.reflect.Field;//optional,for toString shortcut
+
+import acm.graphics.*;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.ImageIO;
+
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
 public class PlayerProjectile {
+    private double x;
+    private double y;
+    private BufferedImage bullet;
     
         
-    public PlayerProjectile(){//constructor
-        ;
+    public PlayerProjectile(double x, double y, LevelTrial game){//constructor
+        this.x = x;
+        this.y = y;
+        bullet = null;
+        try{
+            bullet = ImageIO.read(new File("bullet.png"));
+        } catch (IOException e){
+            System.out.println("Image not found.");
+        }
+    }
+    
+    public void tick(){
+        y -= 10;
+    }
+    
+    public void draw(Graphics g){
+        g.drawImage(bullet, (int) x, (int) y, null);
     }
     
     //other methods
