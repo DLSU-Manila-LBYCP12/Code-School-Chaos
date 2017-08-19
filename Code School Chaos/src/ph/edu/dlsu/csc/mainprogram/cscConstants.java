@@ -57,4 +57,10 @@ public interface cscConstants {
     public static final String UPGRADE9 = "bullet_up9.png";
     
     
+    /* ACM Frame */
+    
+    public static final int ACM_FRAME_OFFSET_X= 16;
+    
+    public static final int ACM_FRAME_OFFSET_Y = 52;
+    
 }

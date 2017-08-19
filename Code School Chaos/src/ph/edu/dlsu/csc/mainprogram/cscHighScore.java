@@ -254,7 +254,7 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
             ;
         }
     }
-    /*public static void main(String[] args){
+    /*Public static void main(String[] args){
         cscHighScore highscore;
         highscore = new cscHighScore();
         highscore.start(args);
