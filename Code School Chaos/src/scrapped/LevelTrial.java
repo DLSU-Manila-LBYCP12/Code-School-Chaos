@@ -1,5 +1,25 @@
-/* © 2017 by Patrick Matthew Chan */
-package ph.edu.dlsu.csc.gameObjects;
+/*
+ * Copyright © Patrick Chan, Christoph Kitane, Neil Velasco.
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package scrapped;
 import acm.graphics.*;
 import acm.io.*;
 import acm.program.*;
@@ -13,34 +33,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import ph.edu.dlsu.csc.mainprogram.cscConstants;
+import static ph.edu.dlsu.csc.mainprogram.cscConstants.*;
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class LevelTemp extends GraphicsProgram implements cscConstants{
+public class LevelTrial extends GraphicsProgram implements cscConstants, Runnable{
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Main Classes ~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //main classes only for testing
     public static void main(String[] args) {
-        new LevelTemp().start(args);
+        //new LevelTrial().start(args);
+        LevelTrial trial = new LevelTrial();
+        
+        trial.setPreferredSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        trial.setMaximumSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        trial.setMinimumSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        
+        JFrame frame = new JFrame("Code School Chaos.exe");
+        frame.add(trial);
+        frame.pack();
+        frame.setSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
+        trial.start();
     }
     public void init(){//set by app
-        setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        controller = new cscController();
     }
-    public void run(){//set by level maker
-        MoveBG=true;
-        PauseBG=false;
-        Thread BGMover=startMoveBGThread();
-        //drawPlayer();
-        add(sprite,(APPLICATION_WIDTH-sprite.getWidth())/2.0D,
-                APPLICATION_HEIGHT*3/4.0D-sprite.getHeight()/2.0D);
-        waitForClick();
-        System.out.println("clicked, now move");
-        addMouseListeners(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                sprite.setLocation(e.getX()-sprite.getWidth()/2.0D,
-                    e.getY()-sprite.getHeight()/2.0D);
-                System.out.println("e.getX() = " + e.getX());
-                System.out.println("e.getY() = " + e.getY());
-            }
-        });
+    public void run(){//set by level maker...?
+        makeLevel();
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~ Debugging & Misc ~~~~~~~~~~~~~~~~~~~~~~~~~//
     // <editor-fold defaultstate="collapsed" desc="p(),pl(),pel()">
@@ -70,10 +91,31 @@ public class LevelTemp extends GraphicsProgram implements cscConstants{
     volatile boolean isMovingBG=false;
     volatile boolean MoveBG=false;
     volatile boolean PauseBG=false;
+    private cscController controller;
     
     //player
-    GImage sprite=new GImage("csc_character.png");
-    //Player pl=new Player(sprite); still idk
+    BulletManager bm=new BulletManager(getGCanvas());
+    Player pl=new Player(getGCanvas(),bm);
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~ call this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+    public void makeLevel(){
+        //background
+        MoveBG=true;
+        PauseBG=false;
+        Thread bgThr=startMoveBGThread();
+        //player
+        pl.addToGCanvas();
+        //bullets
+        addMouseListeners(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //PlayerProjectile aa=new PlayerProjectile(new GImage(UPGRADE9), BULLET_DELAY);
+                //aa.fireAt(getGCanvas(), e.getX(), e.getY(), 10, -15);
+                System.out.println("bullet drawn.");
+                //bm.add(aa);
+            }
+            
+        });
+    }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //bg
     /**
@@ -130,6 +172,7 @@ public class LevelTemp extends GraphicsProgram implements cscConstants{
                     }
                     isMovingBG=false;
                 }
+                //controller.draw(g);
             }
         });
         bgMovement.setPriority(Thread.MIN_PRIORITY);
@@ -137,9 +180,8 @@ public class LevelTemp extends GraphicsProgram implements cscConstants{
         return bgMovement;
     }
     
-    //player
-    void drawPlayer(){
-        add(sprite,(APPLICATION_WIDTH-sprite.getWidth())/2.0D,
-                APPLICATION_HEIGHT*3/4.0D-sprite.getHeight()/2.0D);
+    private void tick(){
+        controller.tick();
     }
+    
 }

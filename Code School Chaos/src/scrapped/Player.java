@@ -1,5 +1,5 @@
 /* © 2017 by Patrick Matthew Chan */
-package ph.edu.dlsu.csc.gameObjects;
+package scrapped;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
 import acm.graphics.GCanvas;

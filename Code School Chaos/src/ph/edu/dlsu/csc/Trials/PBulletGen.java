@@ -22,7 +22,6 @@
 package ph.edu.dlsu.csc.Trials;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
-import ph.edu.dlsu.csc.gameObjects.*;
 import acm.graphics.*;
 import java.awt.*;
 import java.awt.image.*;

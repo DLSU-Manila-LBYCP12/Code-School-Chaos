@@ -2,7 +2,7 @@
 package ph.edu.dlsu.csc.Trials;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
-import ph.edu.dlsu.csc.gameObjects.*;
+import scrapped.BulletManager;
 import acm.graphics.GCanvas;
 import acm.graphics.GCompound;
 import acm.graphics.GImage;
@@ -29,7 +29,7 @@ public class Player implements cscConstants{
     GImage bullet=new GImage(cscConstants.UPGRADE0);
     int dmg=1;
     BulletManager bm=new BulletManager(gc);
-    int bulletSpeedX=5;
+    int bulletSpeedX=0;
     int bulletSpeedY=-10;
     //bulletGen
     volatile PBulletGen bulletGen=new PBulletGen(gc);
@@ -101,21 +101,21 @@ public class Player implements cscConstants{
                 while(!isDeconstructed){
                     JTFTools.pause(BULLET_DELAY);
                     bulletGen.tick();
-                    System.out.println("tick1");
+                    //System.out.println("tick1");
                     JTFTools.pause(BULLET_DELAY);
                     bulletGen.tick();
-                    System.out.println("tick2");
+                    //System.out.println("tick2");
                     if(isKeyPressed || isMousePressed){
-                        bulletGen.setGC(gc);
+                        bulletGen.setGC(gc);//this cannot be removed
                         bulletGen.drawBullet(charSprite.getX()+charSprite.getWidth()/2.0D
                                 , charSprite.getY());
-                        System.out.println("bulletdrawn");
+                        //System.out.println("bulletdrawn");
                     }
                 }
             }
         });
-        //bulThr.setPriority(Thread.MIN_PRIORITY);
-        //bulThr.start();
+        bulThr.setPriority(Thread.MIN_PRIORITY);
+        bulThr.start();
         return bulThr;
     }
     

@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.gameObjects;
+package scrapped;
 import acm.graphics.*;
 import acm.io.*;
 import acm.program.*;

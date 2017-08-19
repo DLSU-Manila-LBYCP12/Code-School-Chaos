@@ -19,78 +19,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.gameObjects;
+package scrapped;
 //import java.lang.reflect.Field;//optional,for toString shortcut
-
-import acm.graphics.GCanvas;
-import acm.graphics.GImage;
-import acm.graphics.GOval;
-import acm.util.JTFTools;
-import java.awt.Color;
-import static ph.edu.dlsu.csc.mainprogram.cscConstants.APPLICATION_HEIGHT;
-import static ph.edu.dlsu.csc.mainprogram.cscConstants.APPLICATION_WIDTH;
-import ph.edu.dlsu.csc.myarraylistchan.MyArrayList;
-
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class BulletManager {
-    MyArrayList<PlayerProjectile> playerBullets=null;
-    volatile boolean startThread=false;
-    GCanvas gc=null;
-    //anotha one for enemy's    
+public class Level1z extends LevelTemp{
     
-    public BulletManager(GCanvas gc){//constructor
-        playerBullets=new MyArrayList<>(1000);
-        this.gc=gc;
+        
+    public Level1z(){//constructor
+        ;
     }
     
     //other methods
-    public void add(PlayerProjectile p){
-        playerBullets.add(p);
-    }
-    //another set for enemy's
-    
-    
-    
-    
-    /*public void updateAll(){
-    for(int i=1;i<=playerBullets.size();){
-    if(!playerBullets.get(i).isActive()){
-    playerBullets.remove(i);
-    } else {
-    i++;
-    }
-    playerBullets.get(i).updatePos(gc);
-    GImage p=playerBullets.get(i).bullet;
-    /*GOval o=new GOval(p.getX(),p.getY(),p.getWidth(),p.getHeight());
-    o.setColor(Color.RED);
-    gc.add(o);
-}
-System.out.println("updating...");
-JTFTools.pause(500);
-//another set for enemy's
-}
-*/
-    synchronized Thread startBMThread(){//can probably ignore the synchronized part, idk
-        startThread=true;
-        Thread bmThr=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(startThread){
-                    JTFTools.pause(1000);
-                    if(!playerBullets.isEmpty()){
-//                        updateAll();
-                    }
-                }
-            }
-        });
-        bmThr.setPriority(Thread.MIN_PRIORITY);
-        bmThr.start();
-        return bmThr;
+    void begin(){
+        MoveBG=true;
+        PauseBG=false;
+        Thread BGMover=startMoveBGThread();
+        //drawPlayer();
+        add(sprite,(APPLICATION_WIDTH-sprite.getWidth())/2.0D,
+                APPLICATION_HEIGHT*3/4.0D-sprite.getHeight()/2.0D);
     }
     
-    void stopBMThread(){
-        startThread=false;
-    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="toString shortcut">
     /*//++toString shortcut

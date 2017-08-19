@@ -4,7 +4,7 @@ package ph.edu.dlsu.csc.mainprogram;//toph, fix this
  *
  * @author Chan, Kitane, Velasco
  */
-import ph.edu.dlsu.csc.gameObjects.Level1z;
+import scrapped.Level1z;
 import acm.graphics.*;
 import acm.io.IODialog;
 import acm.program.*;

@@ -20,7 +20,6 @@
  * SOFTWARE.
  */
 package ph.edu.dlsu.csc.Trials;
-import ph.edu.dlsu.csc.gameObjects.*;
 import acm.graphics.*;
 import acm.io.*;
 import acm.program.*;
@@ -92,32 +91,8 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
         Thread bgThr=startMoveBGThread();
         //player
         pl=new Player(gc);
-        //setBullet later
-        Thread bulThr=pl.addToGCanvas();
-        bulThr.start();
-        //PBulletGen test=new PBulletGen(gc);
-        /*while(true){
-        waitForClick();
-        System.out.println("drawing bullet");
-        /*GImage a=new GImage(UPGRADE3);
-        gc.add(a,100,300);
-        PBulletEntity aaa=new PBulletEntity(gc, a, 10, 1, -5);
-        for(int i=0;i<50;i++){
-        System.out.println("a.getX(); = " + a.getX());
-        System.out.println("a.getY(); = " + a.getY());
-        pause(30);
-        aaa.tick();
-        }
-        test.drawBullet(100, 300);
-        test.tick();
-        pause(30);
-        test.tick();
-        pause(30);
-        test.tick();
-        pause(30);
-        test.tick();
-        pause(30);
-    }*/
+        Thread bulThr=pl.addToGCanvas();//backup
+        
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //bg

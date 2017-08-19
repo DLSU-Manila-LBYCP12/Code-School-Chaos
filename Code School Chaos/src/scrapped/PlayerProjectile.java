@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.gameObjects;
+package scrapped;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
 import acm.graphics.*;
