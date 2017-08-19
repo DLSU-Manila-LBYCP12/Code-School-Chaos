@@ -37,6 +37,8 @@ public class Player implements cscConstants{
     private volatile boolean isMousePressed=false;
     private volatile boolean isKeyPressed=false;
     private volatile boolean isDeconstructed=false;
+    //health
+    int health=20;
     
     
     public Player(GCanvas gc){
@@ -143,8 +145,12 @@ public class Player implements cscConstants{
         bulThr.start();
         return bulThr;
     }
-    
-    
+    public void hit(int decrement){
+        health-=decrement;
+    }
+    public boolean isDead(){
+        return health<=0;
+    }
     
     // <editor-fold defaultstate="collapsed" desc="toString shortcut">
     /*//++toString shortcut
