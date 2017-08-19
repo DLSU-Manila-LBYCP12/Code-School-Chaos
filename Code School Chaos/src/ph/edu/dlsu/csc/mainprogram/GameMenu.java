@@ -55,6 +55,7 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         endlessModeButton = new cscButton("Endless Mode");
         storyModeButton = new cscButton("Story Mode");
         background = new GImage("CSCBackground.png");
+        background.setSize(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X, cscConstants.APPLICATION_HEIGHT);
         teamBam = new GLabel("Team BAM Productions");
         teamBam.setFont("MONTSERRAT-20");
         teamBam.setColor(Color.white);
@@ -98,27 +99,26 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
     }
 
     private void intro() {//add sound effects for epicness
-        this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.setBackground(Color.black);
         pause(500);
-        add(teamBam, APPLICATION_WIDTH / 2 - teamBam.getWidth() / 2,
+        add(teamBam, APPLICATION_WIDTH - teamBam.getWidth()*2,
                 APPLICATION_HEIGHT / 2 - teamBam.getHeight() / 2);
         pause(2000);
         remove(teamBam);
-        add(project, APPLICATION_WIDTH / 2 - project.getWidth() / 2,
+        add(project, APPLICATION_WIDTH - project.getWidth() * 2,
                 APPLICATION_HEIGHT / 2 - project.getHeight() / 2);
         pause(1500);
         remove(project);
         pause(500);
-        add(code, APPLICATION_WIDTH / 2 - code.getWidth() / 2,
+        add(code, APPLICATION_WIDTH - code.getWidth() * 3,
                 APPLICATION_HEIGHT / 2 - code.getHeight() / 2);
         pause(500);
         remove(code);
-        add(school, APPLICATION_WIDTH / 2 - school.getWidth() / 2,
+        add(school, APPLICATION_WIDTH - school.getWidth() * 2,
                 APPLICATION_HEIGHT / 2 - school.getHeight() / 2);
         pause(500);
         remove(school);
-        add(chaos, APPLICATION_WIDTH / 2 - chaos.getWidth() / 2,
+        add(chaos, getWidth()/2 - chaos.getWidth()/2,
                 APPLICATION_HEIGHT / 2 - chaos.getHeight() / 2);
         pause(500);
     }
@@ -131,7 +131,6 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
 
     public void init() {
         intro();
-        this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.setBackground(Color.white);
         add(background);
         pause(250);
@@ -141,29 +140,27 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         codeSchoolChaos();
         pause(200);
         playButton.setCommand("play");
-        add(playButton, 275, 200);
+        add(playButton, getWidth()-playButton.getWidth(), 200);
         add(storyMode, playButton.getX() + playButton.getWidth() / 2 - storyMode.getWidth() / 2 - 2,
                 playButton.getY() + playButton.getHeight() / 2 + storyMode.getAscent() / 2 - 3);//-2 & -3 for shadow effect
         upgradeButton.setCommand("upgrade");
-        add(upgradeButton, 275, 260);
+        add(upgradeButton, playButton.getX(), 260);
         add(upgradeWeapons, upgradeButton.getX() + upgradeButton.getWidth() / 2 - upgradeWeapons.getWidth() / 2 - 2,
                 upgradeButton.getY() + upgradeButton.getHeight() / 2 + upgradeWeapons.getAscent() / 2 - 3);
         highScoresButton.setCommand("highscore");
-        add(highScoresButton, 275, 320);
+        add(highScoresButton, playButton.getX(), 320);
         add(highScores, highScoresButton.getX() + highScoresButton.getWidth() / 2 - highScores.getWidth() / 2 - 2,
                 highScoresButton.getY() + highScoresButton.getHeight() / 2 + highScores.getAscent() / 2 - 3);
         tutorialButton.setCommand("tutorial");
-        add(tutorialButton, 275, 380);
+        add(tutorialButton, playButton.getX(), 380);
         add(tutorial, tutorialButton.getX() + tutorialButton.getWidth() / 2 - tutorial.getWidth() / 2 - 2,
                 tutorialButton.getY() + tutorialButton.getHeight() / 2 + tutorial.getAscent() / 2 - 3);
-        add(code, 225, 50);
-        add(school, 225, 100);
-        add(chaos, 225, 150);
+        add(code, getWidth()-code.getWidth(), 50);
+        add(school, getWidth()-school.getWidth(), 100);
+        add(chaos, getWidth()-chaos.getWidth(), 150);
         setupPlayerName();
         nameDisplay.setLabel("Welcome, " + playerName);
-        this.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
-        add(nameDisplay, APPLICATION_WIDTH / 2 + APPLICATION_WIDTH / 4
-                - nameDisplay.getWidth() / 2, APPLICATION_HEIGHT - 75);
+        add(nameDisplay, getWidth() - nameDisplay.getWidth()*(1.5D), APPLICATION_HEIGHT - 75);
         addMouseListeners();
     }
 
@@ -214,7 +211,8 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         } else if (isClickedUpgradeButton(me.getX(), me.getY())) {
             //call upgrade window
         } else if (isClickedScoreButton(me.getX(), me.getY())) {
-            //call high score window
+            removeAll();
+            new cscHighScore().checkHiScore(0);
         } else if (isClickedTutorialButton(me.getX(), me.getY())) {
             //call tutorial button
         } else if (isClickedStoryButton(me.getX(), me.getY()) && story) {
@@ -237,11 +235,11 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         GLabel storyMode = new GLabel("Story Mode");
         storyMode.setFont("MONTSERRAT-18");
 
-        add(endlessModeButton, 225, 300);
+        add(endlessModeButton, getWidth()-endlessModeButton.getWidth(), 300);
         endlessMode = true;
         add(endless, endlessModeButton.getX() + endlessModeButton.getWidth() / 2 - endless.getWidth() / 2 - 2,
                 endlessModeButton.getY() + endlessModeButton.getHeight() / 2 + endless.getAscent() / 2 - 3);
-        add(storyModeButton, 225, 375);
+        add(storyModeButton, endlessModeButton.getX(), 375);
         story = true;
         add(storyMode, storyModeButton.getX() + storyModeButton.getWidth() / 2 - storyMode.getWidth() / 2 - 2,
                 storyModeButton.getY() + storyModeButton.getHeight() / 2 + storyMode.getAscent() / 2 - 3);
@@ -270,15 +268,15 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
 
     public static void main(String[] args) {
         GameMenu menu=new GameMenu();
-        menu.setPreferredSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
-        menu.setMaximumSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
-        menu.setMinimumSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        menu.setPreferredSize(new Dimension(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X,cscConstants.APPLICATION_HEIGHT));
+        menu.setMaximumSize(new Dimension(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X,cscConstants.APPLICATION_HEIGHT));
+        menu.setMinimumSize(new Dimension(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X,cscConstants.APPLICATION_HEIGHT));
         
         JFrame frame = new JFrame("Code School Chaos.exe");
         frame.add(menu);
         frame.pack();
         frame.setSize(new Dimension(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X,
-            cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+            cscConstants.APPLICATION_HEIGHT));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);

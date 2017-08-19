@@ -57,8 +57,7 @@ public class LevelTrial extends GraphicsProgram implements cscConstants, Runnabl
         
         trial.start();
     }
-    public void init(){//set by app
-        controller = new cscController();
+    public void init(){//set by app;
     }
     public void run(){//set by level maker...?
         makeLevel();

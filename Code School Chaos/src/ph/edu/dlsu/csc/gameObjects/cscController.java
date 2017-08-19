@@ -32,6 +32,14 @@ public class cscController {
     
     PlayerProjectile TempProjectile;
     
+    LevelTrial trial;
+    
+    public cscController(LevelTrial trial){
+        this.trial = trial;
+        
+        addProjectile(new PlayerProjectile(100,300,trial));
+    }
+    
     public void tick(){
         for(int i=0; i<b.size();i++){
             TempProjectile = b.get(i);

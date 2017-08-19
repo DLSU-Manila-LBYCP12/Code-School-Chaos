@@ -40,14 +40,14 @@ public class PlayerProjectile {
         this.y = y;
         bullet = null;
         try{
-            bullet = ImageIO.read(new File("bullet.png"));
+            bullet = ImageIO.read(new File("bullet_up9.png"));
         } catch (IOException e){
             System.out.println("Image not found.");
         }
     }
     
     public void tick(){
-        y -= 10;
+        y -= 1;
     }
     
     public void draw(Graphics g){
