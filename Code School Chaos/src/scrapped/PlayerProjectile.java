@@ -19,47 +19,70 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.Trials;
+package scrapped;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
-import acm.graphics.GCanvas;
-import acm.graphics.GImage;
-import ph.edu.dlsu.csc.mainprogram.cscConstants;
+import acm.graphics.*;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.ImageIO;
 
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class PBulletEntity implements cscConstants{
-    public int dmg=1;
-    public int dx=0;
-    public int dy=-10;
-    //the GImage it manipulates, and the gc
-    public GCanvas gc;
-    public GImage gcBullet;
+public class PlayerProjectile {
+    private double x;
+    private double y;
+    private BufferedImage bullet;
     
-    
-    public PBulletEntity(GCanvas gc,GImage gcBullet,int bulletDmg,int xVel,int yVel){
-        this.gcBullet=gcBullet;
-        this.gc=gc;
-        //bulletInfo
-        dmg=bulletDmg;
-        dx=xVel;
-        dy=-Math.abs(yVel);
-    }
         
+    public PlayerProjectile(double x, double y, LevelTrial game){//constructor
+        this.x = x;
+        this.y = y;
+        bullet = null;
+        try{
+            bullet = ImageIO.read(new File("bullet.png"));
+        } catch (IOException e){
+            System.out.println("Image not found.");
+        }
+    }
+    
+    public void tick(){
+        y -= 10;
+    }
+    
+    public void draw(Graphics g){
+        g.drawImage(bullet, (int) x, (int) y, null);
+    }
     
     //other methods
-    public void tick(){
-        gcBullet.move(dx, dy);
+    /*public void fireAt(GCanvas gc,double xCtr,double yCtr,double xVel,double yVel){
+        x=xCtr-bullet.getWidth()/2.0D;
+        y=yCtr-bullet.getHeight()/2.0D;
+        bullet.setLocation(x,y);
+        dx=xVel;
+        dy=yVel;
+        gc.add(bullet);
+        isActive=true;
     }
     
-    public boolean isInBounds(){
-        double x=gcBullet.getX();
-        double y=gcBullet.getY();
-        return !(/*x<-15||x>APPLICATION_WIDTH+15||*/
-                y<-15||y>APPLICATION_HEIGHT+15);
+    public void updatePos(GCanvas gc){//after 1 delay
+        //if(true || isActive){
+        System.out.println("isActive = " + isActive);
+            bullet.setLocation(x+dx,y+dy);
+            if((x>=gc.getWidth()+15||x<=-15)||
+                    (y>=gc.getHeight()+15||y<=-15)){
+                gc.remove(bullet);
+                isActive=false;
+            }
+        //} else {
+        //    throw new RuntimeException("INACTIVE!");
+        //}
     }
     
     
-    
+    public boolean isActive(){
+        return isActive;
+    }*/
     // <editor-fold defaultstate="collapsed" desc="toString shortcut">
     /*//++toString shortcut
     @Override

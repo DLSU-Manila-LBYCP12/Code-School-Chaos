@@ -19,70 +19,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.gameObjects;
+package ph.edu.dlsu.csc.Trials;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
-import acm.graphics.*;
-import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.ImageIO;
+import acm.graphics.GCanvas;
+import acm.graphics.GImage;
 
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class PlayerProjectile {
-    private double x;
-    private double y;
-    private BufferedImage bullet;
-    
+public class MinionEntity {
+    GCanvas gc;
+    GImage sprite;//the GImg it manipulates
+    double health=20;
         
-    public PlayerProjectile(double x, double y, LevelTrial game){//constructor
-        this.x = x;
-        this.y = y;
-        bullet = null;
-        try{
-            bullet = ImageIO.read(new File("bullet_up9.png"));
-        } catch (IOException e){
-            System.out.println("Image not found.");
-        }
-    }
-    
-    public void tick(){
-        y -= 1;
-    }
-    
-    public void draw(Graphics g){
-        g.drawImage(bullet, (int) x, (int) y, null);
+    public MinionEntity(){//constructor
+        ;
     }
     
     //other methods
-    /*public void fireAt(GCanvas gc,double xCtr,double yCtr,double xVel,double yVel){
-        x=xCtr-bullet.getWidth()/2.0D;
-        y=yCtr-bullet.getHeight()/2.0D;
-        bullet.setLocation(x,y);
-        dx=xVel;
-        dy=yVel;
-        gc.add(bullet);
-        isActive=true;
-    }
-    
-    public void updatePos(GCanvas gc){//after 1 delay
-        //if(true || isActive){
-        System.out.println("isActive = " + isActive);
-            bullet.setLocation(x+dx,y+dy);
-            if((x>=gc.getWidth()+15||x<=-15)||
-                    (y>=gc.getHeight()+15||y<=-15)){
-                gc.remove(bullet);
-                isActive=false;
-            }
-        //} else {
-        //    throw new RuntimeException("INACTIVE!");
-        //}
-    }
+    //hit
     
     
-    public boolean isActive(){
-        return isActive;
-    }*/
+    
     // <editor-fold defaultstate="collapsed" desc="toString shortcut">
     /*//++toString shortcut
     @Override

@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.gameObjects;
+package scrapped;
 import java.util.*;
 import acm.graphics.*;
 import java.awt.*;
@@ -31,14 +31,6 @@ public class cscController {
     private LinkedList<PlayerProjectile> b = new LinkedList<>();
     
     PlayerProjectile TempProjectile;
-    
-    LevelTrial trial;
-    
-    public cscController(LevelTrial trial){
-        this.trial = trial;
-        
-        addProjectile(new PlayerProjectile(100,300,trial));
-    }
     
     public void tick(){
         for(int i=0; i<b.size();i++){

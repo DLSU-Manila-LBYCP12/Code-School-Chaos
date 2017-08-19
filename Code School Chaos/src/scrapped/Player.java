@@ -1,5 +1,5 @@
 /* © 2017 by Patrick Matthew Chan */
-package ph.edu.dlsu.csc.gameObjects;
+package scrapped;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
 import acm.graphics.GCanvas;
@@ -51,13 +51,6 @@ public class Player{
     }
     
     //other methods
-    public double getX(){
-        return this.getX();
-    }
-    
-    public double getY(){
-        return this.getY();
-    }
     public void addToGCanvas(){
         charSprite.setLocation((APPLICATION_WIDTH-charSprite.getWidth())/2.0D,
                 APPLICATION_HEIGHT*3/4.0D-charSprite.getHeight()/2.0D);
@@ -84,8 +77,6 @@ public class Player{
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyChar()==' '){
                     isKeyPressed=true;
-                }else if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    
                 }
             }
 

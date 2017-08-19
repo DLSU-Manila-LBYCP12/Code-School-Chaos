@@ -40,6 +40,15 @@ public interface cscConstants {
     public static final String UPGRADE7 = "bullet_up7.png";    
     public static final String UPGRADE8 = "bullet_up8.png";    
     public static final String UPGRADE9 = "bullet_up9.png";
+    public static final String MBULLET = "bullet_minions.png";
+    public static final String BBULLET = "bullet_boss.png";
+    public static final String BAPPLE = "csc_apple_boss.png";
+    public static final String BANDROID = "csc_android_boss.png";
+    public static final String BWINDOWS = "csc_windows_boss.png";
+    public static final String BLINUX = "csc_linux_boss.png";
+    public static final String MEXPLORER = "csc_explorer_minion.png";
+    public static final String MCHROME = "csc_chrome_minion.png";
+    public static final String MFIREFOX = "csc_firefox_minion.png";
     
     /*images*/
     public static final GImage PBULLET0 = new GImage(UPGRADE0);
@@ -52,15 +61,15 @@ public interface cscConstants {
     public static final GImage PBULLET7 = new GImage(UPGRADE7);
     public static final GImage PBULLET8 = new GImage(UPGRADE8);
     public static final GImage PBULLET9 = new GImage(UPGRADE9);
-    public static final GImage MBULLET = new GImage("bullet_minions.png");
-    public static final GImage BBULLET = new GImage("bullet_boss.png");
-    public static final GImage BAPPLE = new GImage("csc_apple_boss.png");
-    public static final GImage BANDROID = new GImage("csc_android_boss.png");
-    public static final GImage BWINDOWS = new GImage("csc_windows_boss.png");
-    public static final GImage BLINUX = new GImage("csc_linux_boss.png");
-    public static final GImage MEXPLORER = new GImage("csc_explorer_minion.png");
-    public static final GImage MCHROME = new GImage("csc_chrome_minion.png");
-    public static final GImage MFIREFOX = new GImage("csc_firefox_minion.png");
+    public static final GImage IMGMBULLET = new GImage("bullet_minions.png");
+    public static final GImage IMGBBULLET = new GImage("bullet_boss.png");
+    public static final GImage IMGBAPPLE = new GImage("csc_apple_boss.png");
+    public static final GImage IMGBANDROID = new GImage("csc_android_boss.png");
+    public static final GImage IMGBWINDOWS = new GImage("csc_windows_boss.png");
+    public static final GImage IMGBLINUX = new GImage("csc_linux_boss.png");
+    public static final GImage IMGMEXPLORER = new GImage("csc_explorer_minion.png");
+    public static final GImage IMGMCHROME = new GImage("csc_chrome_minion.png");
+    public static final GImage IMGMFIREFOX = new GImage("csc_firefox_minion.png");
     
     /* ACM Frame */
     public static final int ACM_FRAME_OFFSET_X = 16;
