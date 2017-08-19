@@ -48,6 +48,14 @@ public class MinionEntity {
     public void move(double dx,double dy){
         sprite.move(dx, dy);
     }
+    public void chase(Player p,int rVel){
+        double dx1=p.charSprite.getX()-sprite.getX();
+        double dy1=p.charSprite.getY()-sprite.getY();
+        double mag=Math.sqrt(dx1*dx1+dy1*dy1);
+        double dx=dx1*rVel/mag;
+        double dy=dy1*rVel/mag;
+        move(dx, dy);
+    }
     //shoot
     
     

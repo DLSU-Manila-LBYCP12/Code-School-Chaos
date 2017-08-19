@@ -93,6 +93,15 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
         pl=new Player(gc);
         Thread bulThr=pl.addToGCanvas();//backup
         
+        //enemy
+        GImage en=new GImage(MFIREFOX);
+        gc.add(en);
+        MinionEntity m=new MinionEntity(gc, en);
+        while(!m.isDead()){
+            m.chase(pl, 1);
+            pause(30);
+        }
+        
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //bg
