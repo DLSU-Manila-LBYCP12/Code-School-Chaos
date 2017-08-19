@@ -92,7 +92,10 @@ public class MyArrayList<E> implements List<E>{
     }
     
     public boolean isFull(){
-           return NumItems == MAX_LIST;         
+        if(NumItems == MAX_LIST){
+            resize();
+        }
+        return false;
     }
 
     public E get(int index) throws ListIndexOutOfBoundsException{

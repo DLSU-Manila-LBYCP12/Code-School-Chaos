@@ -94,7 +94,8 @@ public class LevelTrial extends GraphicsProgram implements cscConstants, Runnabl
     private cscController controller;
     
     //player
-    Player pl=new Player();
+    BulletManager bm=new BulletManager(getGCanvas());
+    Player pl=new Player(getGCanvas(),bm);
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~ call this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     void makeLevel(){
         //background
@@ -102,7 +103,18 @@ public class LevelTrial extends GraphicsProgram implements cscConstants, Runnabl
         PauseBG=false;
         Thread bgThr=startMoveBGThread();
         //player
-        pl.addToGCanvas(getGCanvas());
+        pl.addToGCanvas();
+        //bullets
+        addMouseListeners(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //PlayerProjectile aa=new PlayerProjectile(new GImage(UPGRADE9), BULLET_DELAY);
+                //aa.fireAt(getGCanvas(), e.getX(), e.getY(), 10, -15);
+                System.out.println("bullet drawn.");
+                //bm.add(aa);
+            }
+            
+        });
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //bg
