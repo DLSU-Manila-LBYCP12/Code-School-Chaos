@@ -19,6 +19,7 @@ import ph.edu.dlsu.csc.mainprogram.cscConstants;
 import static ph.edu.dlsu.csc.mainprogram.cscConstants.APPLICATION_HEIGHT;
 import static ph.edu.dlsu.csc.mainprogram.cscConstants.APPLICATION_WIDTH;
 import static ph.edu.dlsu.csc.mainprogram.cscConstants.BULLET_DELAY;
+import ph.edu.dlsu.csc.mystack.MyStack;
 
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
 public class Player implements cscConstants{
@@ -37,12 +38,12 @@ public class Player implements cscConstants{
     private volatile boolean isMousePressed=false;
     private volatile boolean isKeyPressed=false;
     private volatile boolean isDeconstructed=false;
-    //health
-    int health=20;
+    MyStack<Integer>  score=null;
+    int scoreInt=0;
     
-    
-    public Player(GCanvas gc){
+    public Player(GCanvas gc,MyStack<Integer> score){
         this.gc=gc;//default bullet
+        this.score=score;
     }
     
     public void setBullet(String upgradeNo,int bulletDmg,int xVel,int yVel){
@@ -54,7 +55,7 @@ public class Player implements cscConstants{
         bulletGen.setBullet(bullet, dmg, bulletSpeedX, bulletSpeedY);
     }
     
-    
+    boolean isExited=false;
     //other methods
     /**
      * @return bullet shooting thread
@@ -67,37 +68,15 @@ public class Player implements cscConstants{
         gc.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                double newX=e.getX()-charSprite.getWidth()/2.0D;
-                double newY=e.getY()-charSprite.getHeight()/2.0D;
-                if(newX<-10){
-                    newX=-10;
-                } else if (newX+charSprite.getWidth()>APPLICATION_WIDTH+10){
-                    newX=APPLICATION_WIDTH-charSprite.getWidth()+10;
-                }
-                if(newY<-10){
-                    newY=-10;
-                } else if(newY+charSprite.getHeight()>gc.getHeight()+10){
-                    newY=gc.getHeight()-charSprite.getHeight()+10;
-                }
-                charSprite.setLocation(newX,newY);
+                charSprite.setLocation(e.getX()-charSprite.getWidth()/2.0D,
+                e.getY()-charSprite.getHeight()/2.0D);
                 isMousePressed=true;
             }
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                double newX=e.getX()-charSprite.getWidth()/2.0D;
-                double newY=e.getY()-charSprite.getHeight()/2.0D;
-                if(newX<-10){
-                    newX=-10;
-                } else if (newX+charSprite.getWidth()>APPLICATION_WIDTH+10){
-                    newX=APPLICATION_WIDTH-charSprite.getWidth()+10;
-                }
-                if(newY<-10){
-                    newY=-10;
-                } else if(newY+charSprite.getHeight()>gc.getHeight()+10){
-                    newY=gc.getHeight()-charSprite.getHeight()+10;
-                }
-                charSprite.setLocation(newX,newY);
+                charSprite.setLocation(e.getX()-charSprite.getWidth()/2.0D,
+                e.getY()-charSprite.getHeight()/2.0D);
                 isMousePressed=false;
                 //System.out.println("e.getX() = " + e.getX());
                 //System.out.println("e.getY() = " + e.getY());
@@ -108,6 +87,8 @@ public class Player implements cscConstants{
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyChar()==' '){
                     isKeyPressed=true;
+                } else if (e.getKeyChar()=='q'){
+                    isExited=true;
                 }
             }
 
@@ -125,7 +106,7 @@ public class Player implements cscConstants{
         Thread bulThr=new Thread(new Runnable() {
             @Override
             public void run() {
-                while(!isDeconstructed){
+                while(!isDeconstructed && !isExited){
                     JTFTools.pause(BULLET_DELAY);
                     bulletGen.tick();
                     //System.out.println("tick1");
@@ -136,8 +117,11 @@ public class Player implements cscConstants{
                         bulletGen.setGC(gc);//this cannot be removed
                         bulletGen.drawBullet(charSprite.getX()+charSprite.getWidth()/2.0D
                                 , charSprite.getY());
+                        scoreInt++;
                         //System.out.println("bulletdrawn");
                     }
+                } if(isExited){
+                    score.push(scoreInt);
                 }
             }
         });
@@ -145,12 +129,8 @@ public class Player implements cscConstants{
         bulThr.start();
         return bulThr;
     }
-    public void hit(int decrement){
-        health-=decrement;
-    }
-    public boolean isDead(){
-        return health<=0;
-    }
+    
+    
     
     // <editor-fold defaultstate="collapsed" desc="toString shortcut">
     /*//++toString shortcut

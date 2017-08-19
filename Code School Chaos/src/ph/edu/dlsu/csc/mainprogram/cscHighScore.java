@@ -48,7 +48,11 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
     private double ctrX(GObject g) {
         return (cscConstants.APPLICATION_WIDTH - g.getWidth()) / 2;
     }
-
+    String nowname="";
+public cscHighScore(String name) {
+    this();
+    this.nowname=name;
+}
     public cscHighScore() {
         setSize(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT);
         names.createList();
@@ -107,7 +111,7 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
     }
     public void checkHiScore(int score) {
         System.out.println("checkHiScore executed.");
-        //removeAll();
+        removeAll();
         add(background);
         int size = scores.size();
         if (size == 0) {
@@ -119,6 +123,12 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
             }
             enterName(i + 1, score);
         }
+    }
+    public void checkHiScore() {
+        System.out.println("checkHiScore executed.");
+        removeAll();
+        add(background);
+        enterName(-1, 0);
     }
 
     public void keyPressed(KeyEvent e) {
@@ -152,7 +162,7 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
         add(hiScoreDisp, ctrX(hiScoreDisp), curY);
         curY += HI_SCORES_SPACING + fontSizeY;
         for (int i = 1; i <= names.size(); i++) {
-            if (i < index) {
+            if (index==-1 || i < index) {
                 HSNames[i] = new GLabel(i + ". " + names.get(i));
                 HSScores[i] = new GLabel(scores.get(i) + "");
                 HSNames[i].setFont(HI_SCORE_FONT);
@@ -170,7 +180,7 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
 
             curY += HI_SCORES_SPACING + fontSizeY;
         }
-        if (index <= HI_SCORES) {
+        if (index!=-1 && index <= HI_SCORES) {
             yay.setVisible(true);
             for (int i = names.size(); i >= index; i--) {
                 curY = HSNames[i].getY();
@@ -196,6 +206,9 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
                 pause(1);
             }
             //entry name
+            if(nowname!=null && nowname.length()!=0){
+                name=nowname;
+            }else {
             hasInput = true;
             while (hasInput) {
                 double x = newName.getX();
@@ -204,6 +217,7 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
                 remove(newName);
                 add(newName, x, y);
                 pause(10);
+            }
             }
             //done input
             names.add(index, name);
@@ -256,10 +270,10 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
             ;
         }
     }
-    /*public static void main(String[] args){
+    public static void main(String[] args){
         cscHighScore highscore;
         highscore = new cscHighScore();
         highscore.start(args);
-        highscore.checkHiScore(201);
-    }*/
+        highscore.checkHiScore();
+    }
 }

@@ -32,8 +32,10 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import ph.edu.dlsu.csc.mainprogram.GameMenu;
 import ph.edu.dlsu.csc.mainprogram.cscConstants;
 import static ph.edu.dlsu.csc.mainprogram.cscConstants.*;
+import ph.edu.dlsu.csc.mystack.MyStack;
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
 public class LevelTrial extends GraphicsProgram implements cscConstants{
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Main Classes ~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -46,7 +48,7 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
         gc=getGCanvas();
     }
     public void run(){//set by level maker...?
-        makeLevel(gc);
+        makeLevel(gc,null);
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~ Debugging & Misc ~~~~~~~~~~~~~~~~~~~~~~~~~//
     // <editor-fold defaultstate="collapsed" desc="p(),pl(),pel()">
@@ -82,27 +84,32 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
     
     //player
     Player pl;
+    
+    public MyStack<Integer> score=new MyStack<>();
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~ call this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    public void makeLevel(GCanvas gc){
+    public void makeLevel(GCanvas gc,GameMenu gg){
+        score=new MyStack<>();
         this.gc=gc;
+        System.out.println("load...");
         //background
         MoveBG=true;
         PauseBG=false;
         Thread bgThr=startMoveBGThread();
         //player
-        pl=new Player(gc);
+        pl=new Player(gc,score);
         Thread bulThr=pl.addToGCanvas();//backup
-        
-        //enemy
-        GImage en=new GImage(MFIREFOX);
-        gc.add(en);
-        MinionEntity m=new MinionEntity(gc, en);
-        while(!m.isDead()){
-            m.chase(pl, 1);
-            pause(30);
+        while(bulThr.isAlive()){
+        ;
         }
-        
+        /*System.out.println("click to continue");
+        waitForClick();
+        System.out.println("exit");
+        waitForClick();*/
+        removeAll();
+        gg.setup(score.top());
+        score.pop();
     }
+    RandomGenerator rng=new RandomGenerator();
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //bg
     /**
@@ -129,6 +136,15 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
                     bg1.sendToBack();
                     bg2.sendToBack();
                     bg3.sendToBack();
+                    GImage boss[]=new GImage[4];
+                    boss[0] = new GImage(cscConstants.MCHROME);
+                    boss[1] = new GImage(cscConstants.MEXPLORER);
+                    boss[2] = new GImage(cscConstants.MFIREFOX);
+                    boss[3] = new GImage(cscConstants.MCHROME);
+                    for(int i=0;i<4;i++){
+                        gc.add(boss[i],gc.getWidth()/2.0D,gc.getHeight()/4.0D);
+                        boss[i].move(rng.nextInt(-2,2), rng.nextInt(-2,2));
+                    }
                     
                     //move
                     while(MoveBG){
@@ -147,10 +163,14 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
                             bg2.sendToBack();
                             bg3.sendToBack();
                         }
+                        
                         //move
                         bg1.move(0,1);
                         bg2.move(0,1);
                         bg3.move(0,1);
+                        for(int i=0;i<4;i++){
+                            boss[i].move(rng.nextInt(-2,2), rng.nextInt(-2,2));
+                        }
                         do{
                            pause(bgScrollDelay); 
                         }

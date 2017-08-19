@@ -13,6 +13,8 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import ph.edu.dlsu.csc.Trials.LevelTrial;
 
@@ -85,7 +87,6 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         rect2 = new GRoundRect(225, 100);
         label = new GLabel("");
     }
-
     private void setupPlayerName() {
         IODialog dialog = getDialog();
         while (true) {
@@ -130,6 +131,48 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
     }
 
     public void init() {
+        intro();
+        setup();
+        setupPlayerName();
+        nameDisplay.setLabel("Welcome, " + playerName);
+        add(nameDisplay, getWidth() - nameDisplay.getWidth()*(1.5D), APPLICATION_HEIGHT - 75);
+    }
+    public void setup(int score){
+        System.out.println("score = " + score);
+        removeAll();
+        setup();
+        System.out.println("ok!done");
+        //run();
+        Runnable boRun = new Runnable() {
+        @Override
+        public void run() {
+        
+        //bo.start(new String[0]);
+        JFrame f = new JFrame("High Scores");
+        f.setVisible(true);
+        f.setSize(new Dimension(bo.APPLICATION_WIDTH + ACM_FRAME_OFFSET_X, bo.APPLICATION_HEIGHT + ACM_FRAME_OFFSET_Y));
+        f.add(bo);
+        f.setMenuBar(bo.getMenuBar().createOldStyleMenuBar());
+        f.addWindowListener(new WindowAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+        super.windowClosing(e);
+        bo.stop();
+        f.dispose();
+        }
+        
+        
+        });       //f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.validate();
+        bo.start(new String[0]);
+        
+        bo.checkHiScore(score);
+        }
+        };
+        Thread boThr = new Thread(boRun);
+        boThr.start();
+    }
+    public void setup(){
         this.setBackground(Color.white);
         add(background);
         pause(250);
@@ -157,20 +200,23 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         add(code, getWidth()-code.getWidth(), 50);
         add(school, getWidth()-school.getWidth(), 100);
         add(chaos, getWidth()-chaos.getWidth(), 150);
-        setupPlayerName();
-        nameDisplay.setLabel("Welcome, " + playerName);
-        add(nameDisplay, getWidth() - nameDisplay.getWidth()*(1.5D), APPLICATION_HEIGHT - 75);
+        
         addMouseListeners();
     }
-
     public void run() {
         //remove menu bar:
         Frame[] fs = Frame.getFrames();
         for (Frame f : fs) {
             f.setMenuBar(null);
         }
+        while(true){
+            pause(100);
+            if(isPlay){
+                play();
+            }
+        }
     }
-
+boolean isModeSelection=false;
     private boolean isClickedPlayButton(double x, double y) {
         return (x >= playButton.getX() && x <= playButton.getX() + BUTTON_LENGTH
                 && y >= playButton.getY() && y <= playButton.getY() + BUTTON_HEIGHT);
@@ -182,7 +228,7 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
     }
 
     private boolean isClickedScoreButton(double x, double y) {
-        return (x >= highScoresButton.getX() && x <= highScoresButton.getX() + BUTTON_LENGTH
+        return !isModeSelection && (x >= highScoresButton.getX() && x <= highScoresButton.getX() + BUTTON_LENGTH
                 && y >= highScoresButton.getY() && y <= highScoresButton.getY() + BUTTON_HEIGHT);
     }
 
@@ -200,34 +246,67 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         return (x >= endlessModeButton.getX() && x <= endlessModeButton.getX() + BUTTON_LENGTH
                 && y >= endlessModeButton.getY() && y <= endlessModeButton.getY() + BUTTON_HEIGHT);
     }
-
+    cscHighScore bo = new cscHighScore(playerName);
     public void mouseClicked(MouseEvent me) {
         if (isClickedPlayButton(me.getX(), me.getY())) {
             removeAll();
             add(background);
             codeSchoolChaos();
             levelSelection();
+            isModeSelection=true;
         } else if (isClickedUpgradeButton(me.getX(), me.getY())) {
             //call upgrade window
         } else if (isClickedScoreButton(me.getX(), me.getY())) {
-            removeAll();
-            new cscHighScore().checkHiScore(0);
+            Runnable boRun = new Runnable() {
+                            @Override
+                            public void run() {
+                                
+                                //bo.start(new String[0]);
+                                JFrame f = new JFrame("High Scores");
+                                f.setVisible(true);
+                                f.setSize(new Dimension(bo.APPLICATION_WIDTH + ACM_FRAME_OFFSET_X, bo.APPLICATION_HEIGHT + ACM_FRAME_OFFSET_Y));
+                                f.add(bo);
+                                f.setMenuBar(bo.getMenuBar().createOldStyleMenuBar());
+                                f.addWindowListener(new WindowAdapter() {
+                                    @Override
+                                    public void windowClosing(WindowEvent e) {
+                                        super.windowClosing(e);
+                                        bo.stop();
+                                        f.dispose();
+                                    }
+
+
+                                });       //f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                f.validate();
+                                bo.start(new String[0]);
+                                
+                                bo.checkHiScore();
+                            }
+                        };
+            Thread boThr = new Thread(boRun);
+            boThr.start();
         } else if (isClickedTutorialButton(me.getX(), me.getY())) {
             //call tutorial button
         } else if (isClickedStoryButton(me.getX(), me.getY()) && story) {
             System.out.println("clickedSto");
-            displayMessage("Coming soon");
+            //displayMessage("Coming soon");
             removeAll();
-            LevelTrial lvT=new LevelTrial();
-            lvT.makeLevel(getGCanvas());
-        } else if (isClickedEndlessButton(me.getX(), me.getY()) && endlessMode) {
+            isPlay=true;
+            isModeSelection=false;
+        } else if (me.getSource().equals(endlessModeButton)||isClickedEndlessButton(me.getX(), me.getY()) && true || endlessMode) {
             System.out.println("clickedEnd");
             removeAll();
-            LevelTrial lvT=new LevelTrial();
-            lvT.makeLevel(getGCanvas());
+            isPlay=true;
+            isModeSelection=false;
         }
     }
-
+    boolean isPlay=false;
+public void play(){
+    removeAll();
+            LevelTrial lvT=new LevelTrial();
+            lvT.makeLevel(getGCanvas(),this);
+            isPlay=false;
+}
     private boolean endlessMode;
     private boolean story;
 
@@ -275,7 +354,7 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         menu.setMaximumSize(new Dimension(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X,cscConstants.APPLICATION_HEIGHT));
         menu.setMinimumSize(new Dimension(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X,cscConstants.APPLICATION_HEIGHT));
         
-        JFrame frame = new JFrame("Code School Chaos.exe");
+        JFrame frame = new JFrame("Code School Chaos");
         frame.add(menu);
         frame.pack();
         frame.setSize(new Dimension(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X,

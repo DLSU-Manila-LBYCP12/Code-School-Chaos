@@ -29,6 +29,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import ph.edu.dlsu.csc.mainprogram.cscConstants;
 import ph.edu.dlsu.csc.mylinkedlist.MyLinkedList;
+import ph.edu.dlsu.csc.myqueue.MyQueue;
 
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
 public class PBulletGen implements cscConstants {
@@ -42,16 +43,30 @@ public class PBulletGen implements cscConstants {
     //gc
     GCanvas gc=new GCanvas();
     
-        
+        MyQueue<String> b=new MyQueue<>(15);
     public PBulletGen(GCanvas gc){//constructor
         this.gc=gc;
         bulletList=new MyLinkedList<PBulletEntity>();
+        
+        b.enqueue(UPGRADE0);
+        b.enqueue(UPGRADE1);
+        b.enqueue(UPGRADE2);
+        b.enqueue(UPGRADE3);
+        b.enqueue(UPGRADE4);
+        b.enqueue(UPGRADE5);
+        b.enqueue(UPGRADE6);
+        b.enqueue(UPGRADE7);
+        b.enqueue(UPGRADE8);
+        b.enqueue(UPGRADE9);
+        
     }
     
     public void setGC(GCanvas gc){
         this.gc=gc;
     }
-    
+    public void setBullet(String upgradeNo){
+        bullet=new GImage(upgradeNo);
+    }
     public void setBullet(String upgradeNo,int bulletDmg,int xVel,int yVel){
         bullet=new GImage(upgradeNo);
         dmg=bulletDmg;
@@ -70,6 +85,9 @@ public class PBulletGen implements cscConstants {
     }
     
     public synchronized void drawBullet(double xCtr,double yCtr){
+        setBullet(b.peek());
+        b.enqueue(b.peek());
+        b.dequeue();
         GImage newBull=newBulGImg();
         newBull.setLocation(xCtr-newBull.getWidth()/2,
                 yCtr-newBull.getHeight()/2);

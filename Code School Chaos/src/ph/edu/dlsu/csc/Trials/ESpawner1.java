@@ -34,6 +34,7 @@ import ph.edu.dlsu.csc.mystack.MyStack;
 public class ESpawner1 implements cscConstants{
     GCanvas gc;
     EBulletGen bulGen;
+    Player pl;
     MyArrayList<EBehaved> curEne;
     int killCount=0;
     MyStack<EBehaved> waitEne;
@@ -41,20 +42,23 @@ public class ESpawner1 implements cscConstants{
     //rng
     RandomGenerator r=new RandomGenerator();
         
-    public ESpawner1(GCanvas gc){//constructor
+    public ESpawner1(GCanvas gc, Player p){//constructor
         this.gc=gc;
         bulGen=new EBulletGen(gc);
         curEne=new MyArrayList<>(100);
         killCount=0;
         waitEne=new MyStack<>(waitBeforeBoss+10);
+        pl=p;
     }
     
     //other methods
     public void begin(){
-        String[] a={MCHROME,MEXPLORER,MFIREFOX};
+        String[] a={MCHROME,MFIREFOX,MEXPLORER};
         for(int i=1;i<=waitBeforeBoss;i++){
-            GImage nowMinion=new GImage(a)
-            waitEne.push(
+            int gen=r.nextInt(0,2);
+            GImage nowMinion=new GImage(a[gen]);
+            MinionEntity me=new MinionEntity(gc,nowMinion);
+            EBehaved eb=new EBehaved(gc, me, pl);
         }
     }
     
