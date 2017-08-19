@@ -98,6 +98,18 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
         //player
         pl=new Player(gc,score);
         Thread bulThr=pl.addToGCanvas();//backup
+        
+        //etc
+        
+        GImage boss[]=new GImage[4];
+        boss[0] = new GImage(cscConstants.MCHROME);
+        boss[1] = new GImage(cscConstants.MEXPLORER);
+        boss[2] = new GImage(cscConstants.MFIREFOX);
+        boss[3] = new GImage(cscConstants.MCHROME);
+        for(int i=0;i<4;i++){
+            gc.add(boss[i],gc.getWidth()/2.0D,gc.getHeight()/4.0D);
+            boss[i].move(rng.nextInt(-2,2), rng.nextInt(-2,2));
+        }
         while(bulThr.isAlive()){
         ;
         }
@@ -136,15 +148,6 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
                     bg1.sendToBack();
                     bg2.sendToBack();
                     bg3.sendToBack();
-                    GImage boss[]=new GImage[4];
-                    boss[0] = new GImage(cscConstants.MCHROME);
-                    boss[1] = new GImage(cscConstants.MEXPLORER);
-                    boss[2] = new GImage(cscConstants.MFIREFOX);
-                    boss[3] = new GImage(cscConstants.MCHROME);
-                    for(int i=0;i<4;i++){
-                        gc.add(boss[i],gc.getWidth()/2.0D,gc.getHeight()/4.0D);
-                        boss[i].move(rng.nextInt(-2,2), rng.nextInt(-2,2));
-                    }
                     
                     //move
                     while(MoveBG){
