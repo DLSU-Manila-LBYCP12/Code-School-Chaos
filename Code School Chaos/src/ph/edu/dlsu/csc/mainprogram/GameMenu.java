@@ -1,4 +1,4 @@
-package ph.edu.dlsu.csc.mainprogram;
+package ph.edu.dlsu.csc.mainprogram;//toph, fix this
 
 /**
  *
@@ -9,6 +9,7 @@ import acm.graphics.*;
 import acm.io.IODialog;
 import acm.program.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.event.MouseEvent;
@@ -268,6 +269,21 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         }
 
     public static void main(String[] args) {
-        new GameMenu().start(args);
+        GameMenu menu=new GameMenu();
+        menu.setPreferredSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        menu.setMaximumSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        menu.setMinimumSize(new Dimension(cscConstants.APPLICATION_WIDTH,cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        
+        JFrame frame = new JFrame("Code School Chaos.exe");
+        frame.add(menu);
+        frame.pack();
+        frame.setSize(new Dimension(cscConstants.APPLICATION_WIDTH+cscConstants.ACM_FRAME_OFFSET_X,
+            cscConstants.APPLICATION_HEIGHT+cscConstants.ACM_FRAME_OFFSET_Y));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
+        menu.start(args);
     }
 }

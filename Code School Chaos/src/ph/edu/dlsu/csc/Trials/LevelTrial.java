@@ -82,6 +82,7 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
     volatile boolean PauseBG=false;
     
     //player
+    Player pl;
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~ call this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     public void makeLevel(GCanvas gc){
         this.gc=gc;
@@ -90,7 +91,33 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
         PauseBG=false;
         Thread bgThr=startMoveBGThread();
         //player
-        
+        pl=new Player(gc);
+        //setBullet later
+        Thread bulThr=pl.addToGCanvas();
+        bulThr.start();
+        //PBulletGen test=new PBulletGen(gc);
+        /*while(true){
+        waitForClick();
+        System.out.println("drawing bullet");
+        /*GImage a=new GImage(UPGRADE3);
+        gc.add(a,100,300);
+        PBulletEntity aaa=new PBulletEntity(gc, a, 10, 1, -5);
+        for(int i=0;i<50;i++){
+        System.out.println("a.getX(); = " + a.getX());
+        System.out.println("a.getY(); = " + a.getY());
+        pause(30);
+        aaa.tick();
+        }
+        test.drawBullet(100, 300);
+        test.tick();
+        pause(30);
+        test.tick();
+        pause(30);
+        test.tick();
+        pause(30);
+        test.tick();
+        pause(30);
+    }*/
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //bg

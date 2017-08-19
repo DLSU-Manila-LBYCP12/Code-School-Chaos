@@ -62,17 +62,11 @@ public interface cscConstants {
     public static final GImage MCHROME = new GImage("csc_chrome_minion.png");
     public static final GImage MFIREFOX = new GImage("csc_firefox_minion.png");
     
-    /*acm frame*/
+    /* ACM Frame */
     public static final int ACM_FRAME_OFFSET_X = 16;
     public static final int ACM_FRAME_OFFSET_Y = 52;
     
     /*Bullets..?*/
-    public static final int BULLET_DELAY=50;
-    
-    /* ACM Frame */
-    
-    public static final int ACM_FRAME_OFFSET_X= 16;
-    
-    public static final int ACM_FRAME_OFFSET_Y = 52;
+    public static final int BULLET_DELAY=20;
     
 }

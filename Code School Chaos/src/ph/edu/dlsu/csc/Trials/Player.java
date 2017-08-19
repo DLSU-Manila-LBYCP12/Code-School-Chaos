@@ -18,41 +18,44 @@ import java.awt.event.MouseWheelListener;
 import ph.edu.dlsu.csc.mainprogram.cscConstants;
 import static ph.edu.dlsu.csc.mainprogram.cscConstants.APPLICATION_HEIGHT;
 import static ph.edu.dlsu.csc.mainprogram.cscConstants.APPLICATION_WIDTH;
+import static ph.edu.dlsu.csc.mainprogram.cscConstants.BULLET_DELAY;
 
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class Player{
+public class Player implements cscConstants{
+    //other
     GCanvas gc=null;
+    GImage charSprite=new GImage("csc_character.png");
+    //bullet
     GImage bullet=new GImage(cscConstants.UPGRADE0);
     int dmg=1;
-    GImage charSprite=new GImage("csc_character.png");
-    private volatile boolean isMousePressed=false;
-    private volatile boolean isKeyPressed=false;
-    private volatile boolean isDeconstructed=false;
     BulletManager bm=new BulletManager(gc);
     int bulletSpeedX=5;
     int bulletSpeedY=-10;
+    //bulletGen
+    volatile PBulletGen bulletGen=new PBulletGen(gc);
+    //thread
+    private volatile boolean isMousePressed=false;
+    private volatile boolean isKeyPressed=false;
+    private volatile boolean isDeconstructed=false;
     
-    public Player(GCanvas gc,BulletManager bm,GImage bulletGraphic, int bulletDamage, int bulletSpeedX, int bulletSpeedY){//constructor
-        this.gc=gc;
-        this.bm=bm;
-        bullet=bulletGraphic;
-        dmg=bulletDamage;
-        this.bulletSpeedX=bulletSpeedX;
-        this.bulletSpeedY=-Math.abs(bulletSpeedY);
+    
+    public Player(GCanvas gc){
+        this.gc=gc;//default bullet
     }
-    public Player(GCanvas gc,BulletManager bm,GImage bulletGraphic, int bulletDamage){//constructor
-        this.gc=gc;
-        this.bm=bm;
-        bullet=bulletGraphic;
-        dmg=bulletDamage;
+    
+    public void setBullet(String upgradeNo,int bulletDmg,int xVel,int yVel){
+        bullet=new GImage(upgradeNo);
+        dmg=bulletDmg;
+        bulletSpeedX=xVel;
+        bulletSpeedY=-Math.abs(yVel);
+        //gen
+        bulletGen.setBullet(bullet, dmg, bulletSpeedX, bulletSpeedY);
     }
-    public Player(GCanvas gc,BulletManager bm){//constructor
-        this.gc=gc;
-        this.bm=bm;
-    }
+    
     
     //other methods
-    public void addToGCanvas(){
+    public synchronized Thread addToGCanvas(){
+        //the character
         charSprite.setLocation((APPLICATION_WIDTH-charSprite.getWidth())/2.0D,
                 APPLICATION_HEIGHT*3/4.0D-charSprite.getHeight()/2.0D);
         gc.add(charSprite);
@@ -90,25 +93,30 @@ public class Player{
             
         });
         
+        //bullets
+        bulletGen.setBullet(bullet, dmg, bulletSpeedX, bulletSpeedY);
         Thread bulThr=new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("bulThr running");
                 while(!isDeconstructed){
-                    JTFTools.pause(5000);
-                    if(isKeyPressed||isMousePressed){
-                        PlayerProjectile a=new PlayerProjectile(bullet,dmg);
-                        double xCtr=charSprite.getX()+charSprite.getWidth()/2;
-                        double yPos=charSprite.getY()-bullet.getHeight()/2-2;
-                        a.fireAt(gc, xCtr, yPos, bulletSpeedX, bulletSpeedY);
-                        bm.add(a);
-                        /*System.out.println("bm.playerBullets.size() = " + bm.playerBullets.size());*/
+                    JTFTools.pause(BULLET_DELAY);
+                    bulletGen.tick();
+                    System.out.println("tick1");
+                    JTFTools.pause(BULLET_DELAY);
+                    bulletGen.tick();
+                    System.out.println("tick2");
+                    if(isKeyPressed || isMousePressed){
+                        bulletGen.setGC(gc);
+                        bulletGen.drawBullet(charSprite.getX()+charSprite.getWidth()/2.0D
+                                , charSprite.getY());
+                        System.out.println("bulletdrawn");
                     }
                 }
             }
         });
         //bulThr.setPriority(Thread.MIN_PRIORITY);
-        bulThr.start();
+        //bulThr.start();
+        return bulThr;
     }
     
     
