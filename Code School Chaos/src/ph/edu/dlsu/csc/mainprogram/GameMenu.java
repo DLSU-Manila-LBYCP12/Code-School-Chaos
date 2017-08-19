@@ -13,6 +13,7 @@ import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import ph.edu.dlsu.csc.Trials.LevelTrial;
 
 public class GameMenu extends GraphicsProgram implements cscConstants {
 
@@ -216,10 +217,12 @@ public class GameMenu extends GraphicsProgram implements cscConstants {
         } else if (isClickedTutorialButton(me.getX(), me.getY())) {
             //call tutorial button
         } else if (isClickedStoryButton(me.getX(), me.getY()) && story) {
-            System.out.println("clicked");
+            System.out.println("clickedSto");
+            displayMessage("Coming soon");
         } else if (isClickedEndlessButton(me.getX(), me.getY()) && endlessMode) {
             System.out.println("clickedEnd");
-            displayMessage("Coming soon");
+            removeAll();
+            new LevelTrial().makeLevel(getGCanvas());
         }
     }
 

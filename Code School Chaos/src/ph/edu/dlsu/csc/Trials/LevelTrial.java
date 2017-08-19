@@ -19,7 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.gameObjects;
+package ph.edu.dlsu.csc.Trials;
+import ph.edu.dlsu.csc.gameObjects.*;
 import acm.graphics.*;
 import acm.io.*;
 import acm.program.*;
@@ -43,9 +44,10 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
     }
     public void init(){//set by app
         setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        gc=getGCanvas();
     }
     public void run(){//set by level maker...?
-        makeLevel();
+        makeLevel(gc);
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~ Debugging & Misc ~~~~~~~~~~~~~~~~~~~~~~~~~//
     // <editor-fold defaultstate="collapsed" desc="p(),pl(),pel()">
@@ -69,6 +71,9 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
     
     
     //~~~~~~~~~~~~~~~~~~~~~~~~~ Global Variables ~~~~~~~~~~~~~~~~~~~~~~~~~//
+    //GCanvas
+    GCanvas gc=null;
+    
     //bg img
     Image bgPic=new GImage("Classroom.png").getImage();
     int bgScrollDelay=20;
@@ -77,27 +82,15 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
     volatile boolean PauseBG=false;
     
     //player
-    BulletManager bm=new BulletManager(getGCanvas());
-    Player pl=new Player(getGCanvas(),bm);
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~ call this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-    public void makeLevel(){
+    public void makeLevel(GCanvas gc){
+        this.gc=gc;
         //background
         MoveBG=true;
         PauseBG=false;
         Thread bgThr=startMoveBGThread();
         //player
-        pl.addToGCanvas();
-        //bullets
-        addMouseListeners(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                PlayerProjectile aa=new PlayerProjectile(new GImage(UPGRADE9), BULLET_DELAY);
-                aa.fireAt(getGCanvas(), e.getX(), e.getY(), 10, -15);
-                System.out.println("bullet drawn.");
-                bm.add(aa);
-            }
-            
-        });
+        
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Methods ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
     //bg
@@ -119,9 +112,9 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
                     bg1.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
                     bg2.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
                     bg3.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
-                    add(bg1);
-                    add(bg2,0,-bg1.getHeight());
-                    add(bg3,0,bg2.getY()-bg2.getHeight());
+                    gc.add(bg1);
+                    gc.add(bg2,0,-bg1.getHeight());
+                    gc.add(bg3,0,bg2.getY()-bg2.getHeight());
                     bg1.sendToBack();
                     bg2.sendToBack();
                     bg3.sendToBack();
@@ -133,12 +126,12 @@ public class LevelTrial extends GraphicsProgram implements cscConstants{
                             double y2=bg2.getY();
                             double y3=bg3.getY();
                             double y4=bg3.getY()-bg3.getHeight();
-                            remove(bg1);
-                            remove(bg2);
-                            remove(bg3);
-                            add(bg1,0,y2);
-                            add(bg2,0,y3);
-                            add(bg3,0,y4);
+                            gc.remove(bg1);
+                            gc.remove(bg2);
+                            gc.remove(bg3);
+                            gc.add(bg1,0,y2);
+                            gc.add(bg2,0,y3);
+                            gc.add(bg3,0,y4);
                             bg1.sendToBack();
                             bg2.sendToBack();
                             bg3.sendToBack();
