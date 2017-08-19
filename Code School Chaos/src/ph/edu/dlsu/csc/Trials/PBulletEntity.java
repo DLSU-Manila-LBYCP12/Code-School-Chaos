@@ -54,7 +54,7 @@ public class PBulletEntity implements cscConstants{
     public boolean isInBounds(){
         double x=gcBullet.getX();
         double y=gcBullet.getY();
-        return !(x<-15||x>APPLICATION_WIDTH+15||
+        return !(/*x<-15||x>APPLICATION_WIDTH+15||*/
                 y<-15||y>APPLICATION_HEIGHT+15);
     }
     

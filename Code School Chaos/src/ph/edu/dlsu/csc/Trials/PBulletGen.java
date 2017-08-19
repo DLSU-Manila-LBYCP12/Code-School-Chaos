@@ -94,34 +94,7 @@ public class PBulletGen implements cscConstants {
     }
     
     //other methods
-    /*public void fireAt(GCanvas gc,double xCtr,double yCtr,double xVel,double yVel){
-        x=xCtr-bullet.getWidth()/2.0D;
-        y=yCtr-bullet.getHeight()/2.0D;
-        bullet.setLocation(x,y);
-        dx=xVel;
-        dy=yVel;
-        gc.add(bullet);
-        isActive=true;
-    }
     
-    public void updatePos(GCanvas gc){//after 1 delay
-        //if(true || isActive){
-        System.out.println("isActive = " + isActive);
-            bullet.setLocation(x+dx,y+dy);
-            if((x>=gc.getWidth()+15||x<=-15)||
-                    (y>=gc.getHeight()+15||y<=-15)){
-                gc.remove(bullet);
-                isActive=false;
-            }
-        //} else {
-        //    throw new RuntimeException("INACTIVE!");
-        //}
-    }
-    
-    
-    public boolean isActive(){
-        return isActive;
-    }*/
     // <editor-fold defaultstate="collapsed" desc="toString shortcut">
     /*//++toString shortcut
     @Override

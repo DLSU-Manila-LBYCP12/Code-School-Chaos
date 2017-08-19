@@ -26,7 +26,7 @@ public class Player implements cscConstants{
     GCanvas gc=null;
     GImage charSprite=new GImage("csc_character.png");
     //bullet
-    GImage bullet=new GImage(cscConstants.UPGRADE0);
+    GImage bullet=new GImage(cscConstants.UPGRADE6);
     int dmg=1;
     BulletManager bm=new BulletManager(gc);
     int bulletSpeedX=0;
@@ -54,6 +54,9 @@ public class Player implements cscConstants{
     
     
     //other methods
+    /**
+     * @return bullet shooting thread
+     */
     public synchronized Thread addToGCanvas(){
         //the character
         charSprite.setLocation((APPLICATION_WIDTH-charSprite.getWidth())/2.0D,

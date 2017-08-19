@@ -19,26 +19,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package ph.edu.dlsu.csc.Trials;//
+package ph.edu.dlsu.csc.Trials;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
 import acm.graphics.GCanvas;
 import acm.graphics.GImage;
-import ph.edu.dlsu.csc.mainprogram.cscConstants;
 
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class Minion implements cscConstants{
-    //other
-    GCanvas gc=null;
-    GImage sprite=new GImage(MEXPLORER);
+public class MinionEntity {
+    GCanvas gc;
+    GImage sprite;//the GImg it manipulates
+    double health=20;
         
-    public Minion(){//constructor
+    public MinionEntity(){//constructor
         ;
-        sprite.
     }
     
     //other methods
-    
+    //hit
     
     
     
