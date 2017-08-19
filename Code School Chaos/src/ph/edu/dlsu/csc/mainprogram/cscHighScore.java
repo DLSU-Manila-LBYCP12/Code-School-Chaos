@@ -44,7 +44,7 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
     private final int CLICK_Y_OFFSET = 110;
     private String name = "";
     private GImage background = new GImage("csc_highscore_scene.png");
-
+    
     private double ctrX(GObject g) {
         return (cscConstants.APPLICATION_WIDTH - g.getWidth()) / 2;
     }
@@ -102,11 +102,13 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
         addKeyListeners();
     }
 
+    public void makeHighScore(){
+        
+    }
     public void checkHiScore(int score) {
         System.out.println("checkHiScore executed.");
-        removeAll();
+        //removeAll();
         add(background);
-        System.out.print(background);
         int size = scores.size();
         if (size == 0) {
             enterName(1, score);
@@ -254,12 +256,10 @@ public class cscHighScore extends GraphicsProgram implements cscConstants {
             ;
         }
     }
-    /*Public static void main(String[] args){
+    /*public static void main(String[] args){
         cscHighScore highscore;
         highscore = new cscHighScore();
         highscore.start(args);
-        highscore.checkHiScore(100);
-        highscore.checkHiScore(150);
-        highscore.checkHiScore(200);
+        highscore.checkHiScore(201);
     }*/
 }
