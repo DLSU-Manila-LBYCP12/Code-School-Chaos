@@ -69,4 +69,10 @@ public interface cscConstants {
     /*Bullets..?*/
     public static final int BULLET_DELAY=50;
     
+    /* ACM Frame */
+    
+    public static final int ACM_FRAME_OFFSET_X= 16;
+    
+    public static final int ACM_FRAME_OFFSET_Y = 52;
+    
 }

@@ -22,28 +22,40 @@
 package ph.edu.dlsu.csc.gameObjects;
 //import java.lang.reflect.Field;//optional,for toString shortcut
 
-import acm.graphics.GCanvas;
-import acm.graphics.GImage;
-import ph.edu.dlsu.csc.mainprogram.cscConstants;
+import acm.graphics.*;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.ImageIO;
 
 /* @author Patrick Matthew J. Chan [LBYCP12-EQ1]*/
-public class PlayerProjectile implements cscConstants{
-    GImage bullet=new GImage(UPGRADE0);
-    int dmg=1;
-    double x=0;
-    double y=0;
-    double dx=1;
-    double dy=1;
-    //vel is per delay
-    private boolean isActive=true;
+public class PlayerProjectile {
+    private double x;
+    private double y;
+    private BufferedImage bullet;
+    
         
-    public PlayerProjectile(GImage bulletGraphic, int bulletDamage){//constructor
-        bullet=bulletGraphic;
-        dmg=bulletDamage;
+    public PlayerProjectile(double x, double y, LevelTrial game){//constructor
+        this.x = x;
+        this.y = y;
+        bullet = null;
+        try{
+            bullet = ImageIO.read(new File("bullet.png"));
+        } catch (IOException e){
+            System.out.println("Image not found.");
+        }
+    }
+    
+    public void tick(){
+        y -= 10;
+    }
+    
+    public void draw(Graphics g){
+        g.drawImage(bullet, (int) x, (int) y, null);
     }
     
     //other methods
-    public void fireAt(GCanvas gc,double xCtr,double yCtr,double xVel,double yVel){
+    /*public void fireAt(GCanvas gc,double xCtr,double yCtr,double xVel,double yVel){
         x=xCtr-bullet.getWidth()/2.0D;
         y=yCtr-bullet.getHeight()/2.0D;
         bullet.setLocation(x,y);
@@ -70,7 +82,7 @@ public class PlayerProjectile implements cscConstants{
     
     public boolean isActive(){
         return isActive;
-    }
+    }*/
     // <editor-fold defaultstate="collapsed" desc="toString shortcut">
     /*//++toString shortcut
     @Override

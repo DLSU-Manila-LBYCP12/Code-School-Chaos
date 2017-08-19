@@ -96,11 +96,11 @@ public class Player{
                 while(!isDeconstructed){
                     JTFTools.pause(5000);
                     if(isKeyPressed||isMousePressed){
-                        PlayerProjectile a=new PlayerProjectile(bullet,dmg);
+                        //PlayerProjectile a=new PlayerProjectile(bullet,dmg);
                         double xCtr=charSprite.getX()+charSprite.getWidth()/2;
                         double yPos=charSprite.getY()-bullet.getHeight()/2-2;
-                        a.fireAt(gc, xCtr, yPos, bulletSpeedX, bulletSpeedY);
-                        bm.add(a);
+                        //a.fireAt(gc, xCtr, yPos, bulletSpeedX, bulletSpeedY);
+                        //bm.add(a);
                         /*System.out.println("bm.playerBullets.size() = " + bm.playerBullets.size());*/
                     }
                 }
